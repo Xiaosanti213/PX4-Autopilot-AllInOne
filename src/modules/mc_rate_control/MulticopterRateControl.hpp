@@ -165,6 +165,13 @@ private:
 		(ParamFloat<px4::params::MC_ACRO_SUPEXPO>) _param_mc_acro_supexpo,		/**< superexpo stick curve shape (roll & pitch) */
 		(ParamFloat<px4::params::MC_ACRO_SUPEXPOY>) _param_mc_acro_supexpoy,		/**< superexpo stick curve shape (yaw) */
 
-		(ParamBool<px4::params::MC_BAT_SCALE_EN>) _param_mc_bat_scale_en
+		(ParamBool<px4::params::MC_BAT_SCALE_EN>) _param_mc_bat_scale_en,
+		(ParamBool<px4::params::MC_INDI_ENABLE>) _param_mc_indi_enable,
+		(ParamFloat<px4::params::MC_INDI_GAIN_P>) _param_mc_indi_gain_p,
+		(ParamFloat<px4::params::MC_INDI_GAIN_Y>) _param_mc_indi_gain_y,
+		(ParamFloat<px4::params::MC_INDI_FILTER>) _param_mc_indi_filter
 	)
+	// INDI state
+	matrix::Vector3f _indi_rates_prev{};
+	AlphaFilter<float> _indi_alpha_filter;
 };

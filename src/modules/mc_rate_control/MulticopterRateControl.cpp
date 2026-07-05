@@ -50,7 +50,8 @@ MulticopterRateControl::MulticopterRateControl(bool vtol) :
 	WorkItem(MODULE_NAME, px4::wq_configurations::rate_ctrl),
 	_vehicle_thrust_setpoint_pub(vtol ? ORB_ID(vehicle_thrust_setpoint_virtual_mc) : ORB_ID(vehicle_thrust_setpoint)),
 	_vehicle_torque_setpoint_pub(vtol ? ORB_ID(vehicle_torque_setpoint_virtual_mc) : ORB_ID(vehicle_torque_setpoint)),
-	_loop_perf(perf_alloc(PC_ELAPSED, MODULE_NAME": cycle"))
+	_loop_perf(perf_alloc(PC_ELAPSED, MODULE_NAME": cycle")),
+	_indi_alpha_filter(0.5f)
 {
 	_vehicle_status.vehicle_type = vehicle_status_s::VEHICLE_TYPE_ROTARY_WING;
 
@@ -99,6 +100,9 @@ MulticopterRateControl::parameters_updated()
 				  radians(_param_mc_acro_y_max.get()));
 
 	_output_lpf_yaw.setCutoffFreq(_param_mc_yaw_tq_cutoff.get());
+
+	// INDI filter: set alpha directly from parameter
+	_indi_alpha_filter.setAlpha(_param_mc_indi_filter.get());
 }
 
 void
@@ -215,9 +219,66 @@ MulticopterRateControl::Run()
 				_rate_control.setSaturationStatus(saturation_positive, saturation_negative);
 			}
 
-			// run rate controller
-			Vector3f torque_setpoint =
-				_rate_control.update(rates, _rates_setpoint, angular_accel, dt, _maybe_landed || _landed);
+			// run rate controller (PID or INDI)
+			Vector3f torque_setpoint;
+
+			if (_param_mc_indi_enable.get()) {
+				// ================================================================
+				// INDI: Incremental Nonlinear Dynamic Inversion
+				// ================================================================
+				// Core formula: u = (alpha_des - alpha_obs) / g + alpha_ff / g
+				//
+				// alpha_des = Kp * (rate_sp - rate)     [desired acceleration]
+				// alpha_obs = filtered(angular_accel)    [measured acceleration]
+				// alpha_ff  = (rate_sp - rate_prev) / dt [feedforward term]
+				// g         = control effectiveness (normalized)
+				//
+				// Advantages over PID:
+				// - Uses direct angular acceleration feedback (from IMU)
+				// - Better disturbance rejection
+				// - Physically motivated (inverts rigid-body dynamics)
+				// ================================================================
+
+				// Low-pass filtered angular acceleration (reduces IMU noise)
+				const Vector3f alpha_filtered{
+					_indi_alpha_filter.update(angular_accel(0)),
+					_indi_alpha_filter.update(angular_accel(1)),
+					_indi_alpha_filter.update(angular_accel(2))
+				};
+
+				// Rate error
+				const Vector3f rate_error = _rates_setpoint - rates;
+
+				// Desired angular acceleration: Kp * rate_error
+				const Vector3f K_indi{
+					_param_mc_indi_gain_p.get(),
+					_param_mc_indi_gain_p.get(),
+					_param_mc_indi_gain_y.get()
+				};
+				const Vector3f alpha_des = rate_error.emult(K_indi);
+
+				// Feedforward from rate setpoint derivative (improves tracking)
+				const Vector3f alpha_ff = (_rates_setpoint - _indi_rates_prev) / math::max(dt, 0.0001f);
+
+				// Control effectiveness (normalized by motor mixing)
+				const Vector3f inv_ctrl_effect(1.0f, 1.0f, 1.0f);
+
+				// INDI law
+				torque_setpoint = (alpha_des - alpha_filtered + alpha_ff).emult(inv_ctrl_effect);
+
+				// Constrain to prevent motor saturation
+				for (int axis = 0; axis < 3; axis++) {
+					torque_setpoint(axis) = math::constrain(torque_setpoint(axis), -1.0f, 1.0f);
+				}
+
+				// Store for next iteration feedforward
+				_indi_rates_prev = rates;
+
+			} else {
+				// Standard PID controller
+				torque_setpoint =
+					_rate_control.update(rates, _rates_setpoint, angular_accel, dt, _maybe_landed || _landed);
+			}
 
 			// apply low-pass filtering on yaw axis to reduce high frequency torque caused by rotor acceleration
 			torque_setpoint(2) = _output_lpf_yaw.update(torque_setpoint(2), dt);

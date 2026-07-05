@@ -405,12 +405,17 @@ void GZBridge::magnetometerCallback(const gz::msgs::Magnetometer &msg)
 	report.device_id = id.devid;
 	report.temperature = this->_temperature;
 
-	// FIXME: once we're on jetty or later
-	// The magnetometer plugin publishes in units of gauss and in a weird left handed coordinate system
-	// https://github.com/gazebosim/gz-sim/pull/2460
-	report.x = -msg.field_tesla().y();
-	report.y = -msg.field_tesla().x();
-	report.z = msg.field_tesla().z();
+	// Gazebo reports magnetometer data in Gauss, not Tesla
+	// Even though the message field is called "field_tesla", the actual values are in Gauss
+	// World magnetic_field is in Tesla: 6e-06 2.3e-05 -4.2e-05
+	// Convert from Gazebo Gauss to Tesla (1 Gauss = 1e-4 Tesla)
+	// Also convert from Gazebo ENU to PX4 NED:
+	// PX4 X (North) = Gazebo Y (North)
+	// PX4 Y (East) = Gazebo X (East)
+	// PX4 Z (Down) = -Gazebo Z (Up)
+	report.x = msg.field_tesla().y() * 1e-4;
+	report.y = msg.field_tesla().x() * 1e-4;
+	report.z = -msg.field_tesla().z() * 1e-4;
 
 	_sensor_mag_pub.publish(report);
 }
