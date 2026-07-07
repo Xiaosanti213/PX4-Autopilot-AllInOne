@@ -63,7 +63,9 @@ if (gz-transport_FOUND)
     set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${PX4_GZ_PLUGIN_OUTPUT_DIR})
 
     # Add our plugins as subdirectories
-    add_subdirectory(optical_flow)
+    # optical_flow disabled: requires nested submodule external/klt_feature_tracker
+    # which is missing in this AllInOne repo (network too slow to clone).
+    # add_subdirectory(optical_flow)
     add_subdirectory(template_plugin)
     add_subdirectory(gstreamer)
     add_subdirectory(moving_platform_controller)
@@ -75,8 +77,8 @@ if (gz-transport_FOUND)
 
     # Add an alias target for each plugin
     if (TARGET GstCameraSystem)
-        add_custom_target(px4_gz_plugins ALL DEPENDS OpticalFlowSystem MovingPlatformController TemplatePlugin GenericMotorModelPlugin BuoyancySystemPlugin GstCameraSystem SpacecraftThrusterModelPlugin MotorFailurePlugin AirSpeedPlugin)
+        add_custom_target(px4_gz_plugins ALL DEPENDS MovingPlatformController TemplatePlugin GenericMotorModelPlugin BuoyancySystemPlugin GstCameraSystem SpacecraftThrusterModelPlugin MotorFailurePlugin AirSpeedPlugin)
     else()
-        add_custom_target(px4_gz_plugins ALL DEPENDS OpticalFlowSystem MovingPlatformController TemplatePlugin GenericMotorModelPlugin BuoyancySystemPlugin SpacecraftThrusterModelPlugin MotorFailurePlugin AirSpeedPlugin)
+        add_custom_target(px4_gz_plugins ALL DEPENDS MovingPlatformController TemplatePlugin GenericMotorModelPlugin BuoyancySystemPlugin SpacecraftThrusterModelPlugin MotorFailurePlugin AirSpeedPlugin)
     endif()
 endif()

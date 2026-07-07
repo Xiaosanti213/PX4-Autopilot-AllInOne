@@ -1,0 +1,3 @@
+#ifndef MAVLINK_CONVERSIONS_H_
+#define MAVLINK_CONVERSIONS_H_
+#endif

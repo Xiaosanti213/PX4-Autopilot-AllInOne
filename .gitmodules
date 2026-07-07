@@ -1,0 +1,3 @@
+[submodule "src/modules/uxrce_dds_client/Micro-XRCE-DDS-Client"]
+	path = src/modules/uxrce_dds_client/Micro-XRCE-DDS-Client
+	url = https://github.com/eProsima/Micro-XRCE-DDS-Client.git
