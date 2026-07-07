@@ -70,18 +70,25 @@ function(px4_add_git_submodule)
 		file(RELATIVE_PATH REL_PATH ${PX4_SOURCE_DIR} ${CMAKE_CURRENT_SOURCE_DIR}/${PATH})
 	endif()
 
-	execute_process(
-		COMMAND Tools/check_submodules.sh ${REL_PATH}
-		WORKING_DIRECTORY ${PX4_SOURCE_DIR}
-		)
-
 	string(REPLACE "/" "_" NAME ${PATH})
 	string(REPLACE "." "_" NAME ${NAME})
 
+	# Compute absolute path for the .git dependency
+	# ninja resolves DEPENDS paths from the build dir, so we need absolute paths
+	if(IS_ABSOLUTE ${PATH})
+		set(GIT_SUBMODULE_PATH ${PATH})
+	else()
+		set(GIT_SUBMODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/${PATH})
+	endif()
+
+	# Use env to set GIT_SUBMODULES_ARE_EVIL before running the script.
+	# This makes check_submodules.sh skip git submodule operations that would fail
+	# in the "All-In-One" distribution where submodules are pre-bundled but not
+	# proper git repos.
 	add_custom_command(OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/git_init_${NAME}.stamp
-		COMMAND Tools/check_submodules.sh ${REL_PATH}
+		COMMAND env GIT_SUBMODULES_ARE_EVIL=true ${PX4_SOURCE_DIR}/Tools/check_submodules.sh ${REL_PATH}
 		COMMAND ${CMAKE_COMMAND} -E touch ${CMAKE_CURRENT_BINARY_DIR}/git_init_${NAME}.stamp
-		DEPENDS ${PX4_SOURCE_DIR}/.gitmodules ${PATH}/.git
+		DEPENDS ${PX4_SOURCE_DIR}/.gitmodules ${GIT_SUBMODULE_PATH}/.git
 		COMMENT "git submodule ${REL_PATH}"
 		WORKING_DIRECTORY ${PX4_SOURCE_DIR}
 		USES_TERMINAL
