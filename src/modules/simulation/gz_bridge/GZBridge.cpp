@@ -1,4 +1,4 @@
-/****************************************************************************
+ /*********************************************************
  *
  *   Copyright (c) 2025 PX4 Development Team. All rights reserved.
  *
@@ -405,17 +405,15 @@ void GZBridge::magnetometerCallback(const gz::msgs::Magnetometer &msg)
 	report.device_id = id.devid;
 	report.temperature = this->_temperature;
 
-	// Gazebo reports magnetometer data in Gauss, not Tesla
-	// Even though the message field is called "field_tesla", the actual values are in Gauss
-	// World magnetic_field is in Tesla: 6e-06 2.3e-05 -4.2e-05
-	// Convert from Gazebo Gauss to Tesla (1 Gauss = 1e-4 Tesla)
+	// Gazebo reports magnetometer data in Gauss, not Tesla.
+	// Keep the magnitude and only apply ENU -> PX4 NED axis conversion.
 	// Also convert from Gazebo ENU to PX4 NED:
 	// PX4 X (North) = Gazebo Y (North)
 	// PX4 Y (East) = Gazebo X (East)
 	// PX4 Z (Down) = -Gazebo Z (Up)
-	report.x = msg.field_tesla().y() * 1e-4;
-	report.y = msg.field_tesla().x() * 1e-4;
-	report.z = -msg.field_tesla().z() * 1e-4;
+	report.x = msg.field_tesla().y();
+	report.y = msg.field_tesla().x();
+	report.z = -msg.field_tesla().z();
 
 	_sensor_mag_pub.publish(report);
 }
@@ -1054,3 +1052,4 @@ extern "C" __EXPORT int gz_bridge_main(int argc, char *argv[])
 {
 	return ModuleBase::main(GZBridge::desc, argc, argv);
 }
+
