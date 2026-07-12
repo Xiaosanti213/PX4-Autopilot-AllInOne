@@ -405,15 +405,12 @@ void GZBridge::magnetometerCallback(const gz::msgs::Magnetometer &msg)
 	report.device_id = id.devid;
 	report.temperature = this->_temperature;
 
-	// Gazebo reports magnetometer data in Gauss, not Tesla.
-	// Keep the magnitude and only apply ENU -> PX4 NED axis conversion.
-	// Also convert from Gazebo ENU to PX4 NED:
-	// PX4 X (North) = Gazebo Y (North)
-	// PX4 Y (East) = Gazebo X (East)
-	// PX4 Z (Down) = -Gazebo Z (Up)
-	report.x = msg.field_tesla().y();
-	report.y = msg.field_tesla().x();
-	report.z = -msg.field_tesla().z();
+	// FIXME: once we're on jetty or later
+	// The magnetometer plugin publishes in units of gauss and in a weird left handed coordinate system
+	// https://github.com/gazebosim/gz-sim/pull/2460
+	report.x = -msg.field_tesla().y();
+	report.y = -msg.field_tesla().x();
+	report.z = msg.field_tesla().z();
 
 	_sensor_mag_pub.publish(report);
 }
