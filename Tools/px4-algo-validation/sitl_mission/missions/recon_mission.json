@@ -1,0 +1,15 @@
+{
+  "name": "Long Range Recon",
+  "description": "Multi-point reconnaissance flight",
+  "takeoff_alt": 10,
+  "land_after": true,
+  "waypoints": [
+    { "type": "waypoint", "lat": 47.397742, "lon": 8.545594, "alt": 10 },
+    { "type": "waypoint", "lat": 47.398000, "lon": 8.545594, "alt": 15, "hold_time": 5 },
+    { "type": "loiter",  "lat": 47.398000, "lon": 8.545800, "alt": 15, "duration": 10, "radius": 15 },
+    { "type": "waypoint", "lat": 47.397800, "lon": 8.546000, "alt": 20, "hold_time": 3 },
+    { "type": "circle",  "lat": 47.397600, "lon": 8.545800, "alt": 20, "radius": 20, "turns": 2 },
+    { "type": "loiter",  "lat": 47.397600, "lon": 8.545500, "alt": 10, "duration": 5 },
+    { "type": "rtl",     "lat": 47.397742, "lon": 8.545594, "alt": 0 }
+  ]
+}

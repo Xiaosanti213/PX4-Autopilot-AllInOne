@@ -1,0 +1,17 @@
+{
+  "name": "Figure-8 Pattern",
+  "description": "Fly a figure-8 pattern at 15m",
+  "takeoff_alt": 15,
+  "land_after": true,
+  "waypoints": [
+    { "type": "waypoint", "lat": 47.397742, "lon": 8.545594, "alt": 15 },
+    { "type": "waypoint", "lat": 47.397800, "lon": 8.545650, "alt": 15 },
+    { "type": "waypoint", "lat": 47.397742, "lon": 8.545700, "alt": 15 },
+    { "type": "waypoint", "lat": 47.397690, "lon": 8.545650, "alt": 15 },
+    { "type": "waypoint", "lat": 47.397742, "lon": 8.545594, "alt": 15 },
+    { "type": "waypoint", "lat": 47.397800, "lon": 8.545540, "alt": 15 },
+    { "type": "waypoint", "lat": 47.397742, "lon": 8.545490, "alt": 15 },
+    { "type": "waypoint", "lat": 47.397690, "lon": 8.545540, "alt": 15 },
+    { "type": "waypoint", "lat": 47.397742, "lon": 8.545594, "alt": 15 }
+  ]
+}

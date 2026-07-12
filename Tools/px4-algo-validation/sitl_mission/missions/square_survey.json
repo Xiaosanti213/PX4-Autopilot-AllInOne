@@ -1,0 +1,13 @@
+{
+  "name": "Square Survey Pattern",
+  "description": "Fly a square survey pattern at 10m altitude",
+  "takeoff_alt": 10,
+  "land_after": true,
+  "waypoints": [
+    { "type": "waypoint", "lat": 47.397742, "lon": 8.545594, "alt": 10, "hold_time": 2 },
+    { "type": "waypoint", "lat": 47.397832, "lon": 8.545594, "alt": 10, "hold_time": 2 },
+    { "type": "waypoint", "lat": 47.397832, "lon": 8.545694, "alt": 10, "hold_time": 2 },
+    { "type": "waypoint", "lat": 47.397742, "lon": 8.545694, "alt": 10, "hold_time": 2 },
+    { "type": "waypoint", "lat": 47.397742, "lon": 8.545594, "alt": 10, "hold_time": 0 }
+  ]
+}
