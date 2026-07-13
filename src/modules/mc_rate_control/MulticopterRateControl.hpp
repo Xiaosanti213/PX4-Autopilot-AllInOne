@@ -35,6 +35,7 @@
 
 #include <lib/rate_control/rate_control.hpp>
 #include <lib/mathlib/math/filter/AlphaFilter.hpp>
+#include "LADRC.hpp"
 #include <lib/matrix/matrix/math.hpp>
 #include <lib/perf/perf_counter.h>
 #include <px4_platform_common/defines.h>
@@ -93,6 +94,7 @@ private:
 	void updateActuatorControlsStatus(const vehicle_torque_setpoint_s &vehicle_torque_setpoint, float dt);
 
 	RateControl _rate_control; ///< class for rate control calculations
+	LADRC _ladrc;              ///< LADRC controller (ESO-based)
 
 	uORB::Subscription _battery_status_sub{ORB_ID(battery_status)};
 	uORB::Subscription _control_allocator_status_sub{ORB_ID(control_allocator_status)};
@@ -169,7 +171,14 @@ private:
 		(ParamBool<px4::params::MC_INDI_ENABLE>) _param_mc_indi_enable,
 		(ParamFloat<px4::params::MC_INDI_GAIN_P>) _param_mc_indi_gain_p,
 		(ParamFloat<px4::params::MC_INDI_GAIN_Y>) _param_mc_indi_gain_y,
-		(ParamFloat<px4::params::MC_INDI_FILTER>) _param_mc_indi_filter
+		(ParamFloat<px4::params::MC_INDI_FILTER>) _param_mc_indi_filter,
+		(ParamBool<px4::params::MC_LADRC_ENABLE>) _param_mc_ladrc_enable,
+		(ParamFloat<px4::params::MC_LADRC_B0>) _param_mc_ladrc_b0,
+		(ParamFloat<px4::params::MC_LADRC_B0_Y>) _param_mc_ladrc_b0_y,
+		(ParamFloat<px4::params::MC_LADRC_WO>) _param_mc_ladrc_wo,
+		(ParamFloat<px4::params::MC_LADRC_WO_Y>) _param_mc_ladrc_wo_y,
+		(ParamFloat<px4::params::MC_LADRC_WC>) _param_mc_ladrc_wc,
+		(ParamFloat<px4::params::MC_LADRC_WC_Y>) _param_mc_ladrc_wc_y
 	)
 	// INDI state
 	matrix::Vector3f _indi_rates_prev{};

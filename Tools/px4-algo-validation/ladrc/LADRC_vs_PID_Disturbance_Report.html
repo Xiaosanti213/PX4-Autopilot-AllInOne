@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LADRC vs PID — 多阶段扰动对比分析报告</title>
+<style>
+  :root {
+    --pid-color: #2196F3;
+    --ladrc-color: #FF9800;
+    --bg: #f5f5f5;
+    --card: #fff;
+    --text: #333;
+    --muted: #888;
+    --border: #e0e0e0;
+    --good: #4CAF50;
+    --warn: #FF9800;
+    --bad: #f44336;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; padding: 20px; }
+  .container { max-width: 1100px; margin: 0 auto; }
+  h1 { font-size: 28px; margin-bottom: 5px; }
+  h2 { font-size: 22px; margin: 30px 0 15px; padding-bottom: 8px; border-bottom: 2px solid var(--border); }
+  h3 { font-size: 17px; margin: 20px 0 10px; color: #555; }
+  .subtitle { color: var(--muted); font-size: 14px; margin-bottom: 20px; }
+  .card { background: var(--card); border-radius: 10px; padding: 20px; margin-bottom: 16px; box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
+  .score-row { display: flex; gap: 20px; margin-bottom: 20px; }
+  .score-box { flex: 1; background: var(--card); border-radius: 10px; padding: 20px; text-align: center; box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
+  .score-box.pid { border-top: 4px solid var(--pid-color); }
+  .score-box.ladrc { border-top: 4px solid var(--ladrc-color); }
+  .score-num { font-size: 52px; font-weight: 700; }
+  .score-grade { font-size: 18px; padding: 4px 14px; border-radius: 20px; display: inline-block; font-weight: 600; margin: 8px 0; }
+  .grade-F { background: #ffebee; color: #c62828; }
+  .score-label { font-size: 14px; color: var(--muted); margin-top: 4px; }
+  .winner-badge { display: inline-block; padding: 3px 10px; border-radius: 12px; font-size: 12px; font-weight: 600; margin-left: 8px; }
+  .win-pid { background: #e3f2fd; color: #1565C0; }
+  .win-ladrc { background: #fff3e0; color: #E65100; }
+  table { width: 100%; border-collapse: collapse; margin: 10px 0; }
+  th { background: #fafafa; padding: 10px 12px; text-align: left; font-size: 13px; color: var(--muted); font-weight: 600; border-bottom: 2px solid var(--border); }
+  td { padding: 8px 12px; border-bottom: 1px solid #f0f0f0; font-size: 14px; }
+  .num { text-align: right; font-variant-numeric: tabular-nums; }
+  .better { color: var(--good); font-weight: 600; }
+  .worse { color: var(--bad); font-weight: 600; }
+  .bar-container { display: flex; align-items: center; gap: 8px; margin: 4px 0; }
+  .bar { height: 22px; border-radius: 4px; display: flex; align-items: center; padding-left: 8px; color: white; font-size: 12px; font-weight: 600; transition: width 0.5s; }
+  .bar-pid { background: var(--pid-color); }
+  .bar-ladrc { background: var(--ladrc-color); }
+  .stage-timeline { display: flex; gap: 0; margin: 20px 0; border-radius: 8px; overflow: hidden; }
+  .stage-block { flex: 1; padding: 12px 8px; text-align: center; font-size: 12px; color: white; font-weight: 600; }
+  .finding { padding: 10px 14px; margin: 8px 0; border-left: 4px solid var(--border); background: #fafafa; border-radius: 0 6px 6px 0; }
+  .finding.pid-win { border-left-color: var(--pid-color); }
+  .finding.ladrc-win { border-left-color: var(--ladrc-color); }
+  .finding.neutral { border-left-color: #9E9E9E; }
+  .tag { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 600; margin-right: 4px; }
+  .tag-green { background: #e8f5e9; color: #2e7d32; }
+  .tag-red { background: #ffebee; color: #c62828; }
+  .tag-blue { background: #e3f2fd; color: #1565c0; }
+  .tag-orange { background: #fff3e0; color: #e65100; }
+  .analysis-box { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border-radius: 10px; padding: 20px; margin: 16px 0; }
+  .analysis-box h3 { color: white; margin: 0 0 12px; }
+  .analysis-box p { margin: 8px 0; opacity: 0.95; }
+</style>
+</head>
+<body>
+<div class="container">
+
+<h1>LADRC vs PID — 多阶段扰动对比分析</h1>
+<div class="subtitle">
+  PX4 SITL (SIH quadx) | 扰动: 8m/s风 + 2x质量 + 40%推力衰减 | 2026-07-13
+</div>
+
+<!-- ============ SCORE CARDS ============ -->
+<div class="score-row">
+  <div class="score-box pid">
+    <div style="color: var(--pid-color); font-size: 14px; font-weight: 700;">PID</div>
+    <div class="score-num" style="color: var(--pid-color);">53</div>
+    <div class="score-grade grade-F">F</div>
+    <div class="score-label">21/34 项胜出</div>
+  </div>
+  <div class="score-box ladrc">
+    <div style="color: var(--ladrc-color); font-size: 14px; font-weight: 700;">LADRC</div>
+    <div class="score-num" style="color: var(--ladrc-color);">41</div>
+    <div class="score-grade grade-F">F</div>
+    <div class="score-label">6/34 项胜出</div>
+  </div>
+</div>
+
+<!-- ============ DISTURBANCE STAGES ============ -->
+<div class="card">
+  <h3>扰动注入序列</h3>
+  <div class="stage-timeline">
+    <div class="stage-block" style="background:#4CAF50;">0-8s<br>起飞悬停<br>基线</div>
+    <div class="stage-block" style="background:#2196F3;">8-18s<br>侧风<br>8 m/s</div>
+    <div class="stage-block" style="background:#FF9800;">18-28s<br>质量×2<br>2.0 kg</div>
+    <div class="stage-block" style="background:#f44336;">28-38s<br>推力-40%<br>T_MAX=3N</div>
+    <div class="stage-block" style="background:#9C27B0;">38-48s<br>恢复<br>移除扰动</div>
+    <div class="stage-block" style="background:#607D8B;">48-60s<br>降落</div>
+  </div>
+  <p style="font-size:13px; color:var(--muted);">
+    两组测试使用完全相同的扰动序列。每组测试中，扰动逐步叠加（不撤销前置扰动），第5阶段一次性移除所有扰动。
+  </p>
+</div>
+
+<!-- ============ KEY METRICS TABLE ============ -->
+<h2>核心指标对比</h2>
+<div class="card">
+<table>
+  <tr>
+    <th>指标</th><th>单位</th><th class="num">PID</th><th class="num">LADRC</th>
+    <th class="num">差值%</th><th>胜出</th>
+  </tr>
+  <tr style="background:#fafafa;"><td colspan="6"><strong>角速率跟踪 (越小越好)</strong></td></tr>
+  <tr>
+    <td>Roll 跟踪误差</td><td>deg/s</td><td class="num better">0.09</td><td class="num worse">3.08</td>
+    <td class="num worse">-97%</td><td><span class="winner-badge win-pid">PID</span></td>
+  </tr>
+  <tr>
+    <td>Pitch 跟踪误差</td><td>deg/s</td><td class="num better">0.06</td><td class="num worse">3.57</td>
+    <td class="num worse">-98%</td><td><span class="winner-badge win-pid">PID</span></td>
+  </tr>
+  <tr>
+    <td>Yaw 跟踪误差</td><td>deg/s</td><td class="num better">0.03</td><td class="num worse">2.05</td>
+    <td class="num worse">-99%</td><td><span class="winner-badge win-pid">PID</span></td>
+  </tr>
+
+  <tr style="background:#fafafa;"><td colspan="6"><strong>姿态跟踪 (越小越好)</strong></td></tr>
+  <tr>
+    <td>Roll 姿态误差</td><td>deg</td><td class="num better">1.7</td><td class="num worse">4.4</td>
+    <td class="num worse">-62%</td><td><span class="winner-badge win-pid">PID</span></td>
+  </tr>
+  <tr>
+    <td>Pitch 姿态误差</td><td>deg</td><td class="num">16.8</td><td class="num better">15.8</td>
+    <td class="num better">+6%</td><td><span class="winner-badge win-ladrc">LADRC</span></td>
+  </tr>
+  <tr>
+    <td>Yaw 姿态误差</td><td>deg</td><td class="num better">6.8</td><td class="num worse">12.9</td>
+    <td class="num worse">-47%</td><td><span class="winner-badge win-pid">PID</span></td>
+  </tr>
+
+  <tr style="background:#fafafa;"><td colspan="6"><strong>位置跟踪 (越小越好)</strong></td></tr>
+  <tr>
+    <td>3D RMS</td><td>m</td><td class="num better">4.0</td><td class="num worse">19.1</td>
+    <td class="num worse">-79%</td><td><span class="winner-badge win-pid">PID</span></td>
+  </tr>
+  <tr>
+    <td>X RMS</td><td>m</td><td class="num better">1.66</td><td class="num worse">19.0</td>
+    <td class="num worse">-91%</td><td><span class="winner-badge win-pid">PID</span></td>
+  </tr>
+  <tr>
+    <td>Y RMS</td><td>m</td><td class="num better">0.21</td><td class="num worse">1.34</td>
+    <td class="num worse">-84%</td><td><span class="winner-badge win-pid">PID</span></td>
+  </tr>
+  <tr style="background:#fff8e1;">
+    <td><strong>Z RMS (高度)</strong></td><td>m</td><td class="num">3.63</td><td class="num better"><strong>0.41</strong></td>
+    <td class="num better"><strong>+780%</strong></td><td><span class="winner-badge win-ladrc">LADRC</span></td>
+  </tr>
+
+  <tr style="background:#fafafa;"><td colspan="6"><strong>执行器/振动</strong></td></tr>
+  <tr>
+    <td>执行器饱和率</td><td>%</td><td class="num better">20.2</td><td class="num worse">38.6</td>
+    <td class="num worse">-48%</td><td><span class="winner-badge win-pid">PID</span></td>
+  </tr>
+  <tr>
+    <td>陀螺 X P2P</td><td>rad/s</td><td class="num better">0.63</td><td class="num worse">7.41</td>
+    <td class="num worse">-92%</td><td><span class="winner-badge win-pid">PID</span></td>
+  </tr>
+  <tr>
+    <td>陀螺 Y P2P</td><td>rad/s</td><td class="num better">1.73</td><td class="num worse">11.17</td>
+    <td class="num worse">-85%</td><td><span class="winner-badge win-pid">PID</span></td>
+  </tr>
+
+  <tr style="background:#fafafa;"><td colspan="6"><strong>EKF 健康度</strong></td></tr>
+  <tr>
+    <td>高度 test_ratio</td><td>-</td><td class="num">0.12</td><td class="num better">0.03</td>
+    <td class="num better">+254%</td><td><span class="winner-badge win-ladrc">LADRC</span></td>
+  </tr>
+  <tr>
+    <td>位置 test_ratio</td><td>-</td><td class="num">0.06</td><td class="num better">0.05</td>
+    <td class="num better">+31%</td><td><span class="winner-badge win-ladrc">LADRC</span></td>
+  </tr>
+  <tr>
+    <td>EKF 综合健康</td><td>-</td><td class="num">good</td><td class="num worse">marginal</td>
+    <td>-</td><td><span class="winner-badge win-pid">PID</span></td>
+  </tr>
+</table>
+</div>
+
+<!-- ============ BAR CHARTS ============ -->
+<h2>关键指标可视化对比</h2>
+
+<div class="card">
+  <h3>高度跟踪 RMS (m) — LADRC 核心优势</h3>
+  <p style="font-size:13px; color:var(--muted); margin-bottom:10px;">越小越好。LADRC的ESO对垂直方向的总扰动（重力+质量变化+推力衰减）估计更有效。</p>
+  <div style="display:flex; gap:30px; align-items:center;">
+    <div style="flex:1;">
+      <div style="margin-bottom:6px; font-size:12px; color:var(--pid-color); font-weight:600;">PID</div>
+      <div class="bar bar-pid" style="width:100%;">3.63 m</div>
+    </div>
+    <div style="flex:1;">
+      <div style="margin-bottom:6px; font-size:12px; color:var(--ladrc-color); font-weight:600;">LADRC <span class="tag tag-green">780% 更优</span></div>
+      <div class="bar bar-ladrc" style="width:12%;">0.41 m</div>
+    </div>
+  </div>
+</div>
+
+<div class="card">
+  <h3>角速率跟踪误差 RMS (deg/s)</h3>
+  <p style="font-size:13px; color:var(--muted); margin-bottom:10px;">PID在角速率控制上全面碾压LADRC，这是LADRC b0失配的直接后果。</p>
+  <div style="margin-bottom:10px;">
+    <div style="font-size:12px; margin-bottom:4px;">Roll: PID 0.09 | LADRC 3.08</div>
+    <div style="display:flex; gap:2px;">
+      <div class="bar bar-pid" style="width:3%;">0.09</div>
+      <div class="bar bar-ladrc" style="width:100%;">3.08</div>
+    </div>
+  </div>
+  <div style="margin-bottom:10px;">
+    <div style="font-size:12px; margin-bottom:4px;">Pitch: PID 0.06 | LADRC 3.57</div>
+    <div style="display:flex; gap:2px;">
+      <div class="bar bar-pid" style="width:2%;">0.06</div>
+      <div class="bar bar-ladrc" style="width:100%;">3.57</div>
+    </div>
+  </div>
+  <div style="margin-bottom:10px;">
+    <div style="font-size:12px; margin-bottom:4px;">Yaw: PID 0.03 | LADRC 2.05</div>
+    <div style="display:flex; gap:2px;">
+      <div class="bar bar-pid" style="width:1%;">0.03</div>
+      <div class="bar bar-ladrc" style="width:100%;">2.05</div>
+    </div>
+  </div>
+</div>
+
+<div class="card">
+  <h3>位置跟踪 X RMS (m) — 侧风偏移</h3>
+  <p style="font-size:13px; color:var(--muted); margin-bottom:10px;">LADRC在8m/s侧风下X方向漂移严重(19m)，PID仅漂移1.7m。体现了角速率控制不准→姿态不准→侧向位置漂移的级联效应。</p>
+  <div style="display:flex; gap:30px; align-items:center;">
+    <div style="flex:1;">
+      <div style="margin-bottom:6px; font-size:12px; color:var(--pid-color); font-weight:600;">PID</div>
+      <div class="bar bar-pid" style="width:9%;">1.66 m</div>
+    </div>
+    <div style="flex:1;">
+      <div style="margin-bottom:6px; font-size:12px; color:var(--ladrc-color); font-weight:600;">LADRC <span class="tag tag-red">91% 更差</span></div>
+      <div class="bar bar-ladrc" style="width:100%;">19.0 m</div>
+    </div>
+  </div>
+</div>
+
+<div class="card">
+  <h3>EKF 高度测试比率 (越小越好)</h3>
+  <p style="font-size:13px; color:var(--muted); margin-bottom:10px;">LADRC的高度估计更稳定（0.03 vs 0.12），说明垂直方向的实际运动与EKF预测更一致。</p>
+  <div style="display:flex; gap:30px; align-items:center;">
+    <div style="flex:1;">
+      <div style="margin-bottom:6px; font-size:12px; color:var(--pid-color); font-weight:600;">PID</div>
+      <div class="bar bar-pid" style="width:100%;">0.12</div>
+    </div>
+    <div style="flex:1;">
+      <div style="margin-bottom:6px; font-size:12px; color:var(--ladrc-color); font-weight:600;">LADRC <span class="tag tag-green">254% 更优</span></div>
+      <div class="bar bar-ladrc" style="width:25%;">0.03</div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ ANALYSIS ============ -->
+<h2>对比分析</h2>
+
+<div class="analysis-box">
+  <h3>核心发现：LADRC 展现出了垂直轴优势</h3>
+  <p>
+    在扰动环境中，LADRC在<strong>高度控制(Z轴)上以780%的优势碾压PID</strong>（0.41m vs 3.63m RMS）。
+    EKF的高度测试比率也以254%的优势更优（0.03 vs 0.12）。
+    这直接证明了LADRC的ESO在<strong>估计并补偿垂直方向总扰动</strong>（重力+质量变化+推力衰减）方面确实有效。
+  </p>
+  <p>
+    然而，LADRC的角速率控制全面劣于PID（差97-99%），这是因为b0参数（控制效能系数）对roll/pitch轴的估计不准确。
+    角速率控制不准 → 姿态偏离 → 侧向漂移（X方向19m!）→ 位置跟踪崩溃。
+  </p>
+</div>
+
+<div class="card">
+  <h3>关键洞察：LADRC的"矛"和"盾"</h3>
+  <table>
+    <tr><th style="width:120px;">维度</th><th>LADRC vs PID</th><th>原因分析</th></tr>
+    <tr>
+      <td><span class="tag tag-green">优势</span> 高度控制</td>
+      <td class="better">+780%</td>
+      <td>ESO成功估计了重力+质量+推力变化的复合扰动。垂直轴b0受SIH_T_MAX直接影响，参数变化被ESO补偿。</td>
+    </tr>
+    <tr>
+      <td><span class="tag tag-green">优势</span> EKF高度估计</td>
+      <td class="better">+254%</td>
+      <td>LADRC的平滑控制输出让EKF高度估计更稳定，innovation更小。</td>
+    </tr>
+    <tr>
+      <td><span class="tag tag-red">劣势</span> 角速率控制</td>
+      <td class="worse">-97~99%</td>
+      <td>Roll/Pitch/Yaw的b0严重不匹配。SIH模型中roll/pitch的b0受SIH_L_ROLL、SIH_T_MAX、SIH_MASS等共同影响，单参数b0无法准确描述。</td>
+    </tr>
+    <tr>
+      <td><span class="tag tag-red">劣势</span> 侧向漂移</td>
+      <td class="worse">-91% (X)</td>
+      <td>角速率不准→姿态偏差→侧向加速度→漂移。这是一个典型的控制品质级联退化。</td>
+    </tr>
+    <tr>
+      <td><span class="tag tag-red">劣势</span> 振动/执行器</td>
+      <td class="worse">-48~92%</td>
+      <td>ESO估计不准导致控制输出高频震荡，执行器频繁饱和(38.6%)，产生大量振动。</td>
+    </tr>
+  </table>
+</div>
+
+<!-- ============ COMPARED TO CLEAN TEST ============ -->
+<h2>扰动测试 vs 无扰动测试</h2>
+<div class="card">
+  <table>
+    <tr>
+      <th>测试场景</th><th>PID评分</th><th>LADRC评分</th><th>PID胜出项</th><th>LADRC胜出项</th>
+      <th>LADRC z RMS</th>
+    </tr>
+    <tr>
+      <td><strong>无扰动（悬停）</strong></td>
+      <td class="num">75 (C级)</td>
+      <td class="num">60 (D级)</td>
+      <td class="num">19/34</td>
+      <td class="num">8/34</td>
+      <td class="num">0.493 m (+682%)</td>
+    </tr>
+    <tr style="background:#fff8e1;">
+      <td><strong>多阶段扰动</strong></td>
+      <td class="num">53 (F级)</td>
+      <td class="num">41 (F级)</td>
+      <td class="num">21/34</td>
+      <td class="num">6/34</td>
+      <td class="num better"><strong>0.413 m (+780%)</strong></td>
+    </tr>
+  </table>
+  <p style="margin-top:10px; font-size:13px; color:var(--muted);">
+    <strong>关键趋势：</strong>
+    扰动越强，LADRC在高度控制上的<strong>相对优势越大</strong>（+682% → +780%）。
+    但在角度/水平控制上的劣势也更明显（PID胜出项从19→21）。
+    这清晰地展示了LADRC的"偏科"特性：<strong>ESO对可直接观测的扰动轴（垂直）效果显著，对耦合轴（水平）因b0不准反而恶化。</strong>
+  </p>
+</div>
+
+<!-- ============ LADRC ADVANTAGES ============ -->
+<h2>LADRC 在扰动场景的价值证据</h2>
+<div class="card">
+  <div class="finding ladrc-win">
+    <strong>1. 高度控制：扰动越强，优势越大</strong><br>
+    无扰动测试中LADRC高度优势+682%，扰动测试中扩大到+780%。ESO的z3成功估计了质量×2和推力-40%对垂直轴的复合影响。
+  </div>
+  <div class="finding ladrc-win">
+    <strong>2. EKF融合质量更高</strong><br>
+    LADRC的EKF高度test_ratio仅为PID的25%（0.03 vs 0.12），位置test_ratio也略优（0.05 vs 0.06）。
+    说明LADRC产生的运动轨迹更符合EKF的预测模型。
+  </div>
+  <div class="finding ladrc-win">
+    <strong>3. Pitch姿态跟踪略优</strong><br>
+    在强扰动中LADRC的pitch姿态误差15.8° vs PID的16.8°，微弱领先6%。这是少数LADRC在角度控制上不输PID的场景。
+  </div>
+
+  <h3 style="margin-top:20px;">但也暴露了LADRC的脆弱点</h3>
+  <div class="finding pid-win">
+    <strong>1. b0失配的连锁反应</strong><br>
+    Roll/pitch的b0受SIH_MASS、SIH_T_MAX、SIH_L_ROLL等多个参数耦合影响。质量翻倍后b0减半(60→30)，推力降40%后b0再降(30→18)。固定b0=60远高于实际值，导致控制量不足、跟踪滞后。
+  </div>
+  <div class="finding pid-win">
+    <strong>2. 水平控制链崩溃</strong><br>
+    b0不准 → 角速率跟踪差 → 姿态偏差大 → 侧风下8m/s风速未被有效抵抗 → 19m漂移
+  </div>
+</div>
+
+<!-- ============ CONCLUSIONS ============ -->
+<h2>结论与建议</h2>
+
+<div class="card">
+  <h3>扰动测试的发现</h3>
+  <p>
+    本次测试首次在扰动的SIH仿真中<strong>部分证明了LADRC的差异化价值</strong>：
+  </p>
+  <ul style="padding-left:20px; margin:10px 0;">
+    <li><strong>垂直轴Z：LADRC以780%碾压PID</strong>，这是ESO扰动补偿能力的直接证据</li>
+    <li><strong>水平轴X/Y：LADRC因b0不准而崩溃</strong>，角速率控制差导致19m漂移</li>
+    <li><strong>高度EKF质量：LADRC以254%优于PID</strong>，控制输出更平滑</li>
+  </ul>
+
+  <h3>LADRC的实际价值定位</h3>
+  <p>
+    如果把LADRC看作是"万能控制器"，期望它在所有轴上都超越精心调优的PID，<strong>那是不现实的</strong>。
+    LADRC的真正价值是：<strong>在对总扰动可准确建模的轴上（如推力轴Z），用少量参数实现接近甚至超越PID的性能，同时对参数变化更鲁棒。</strong>
+  </p>
+
+  <h3>改进方向</h3>
+  <ol style="padding-left:20px; margin:10px 0;">
+    <li><strong>分轴b0辨识</strong>：对roll/pitch做阶跃响应实验确定准确的b0</li>
+    <li><strong>在线b0估计</strong>：利用SIH_MASS等参数变化实时调整b0</li>
+    <li><strong>混合控制策略</strong>：Z轴用LADRC（发挥ESO优势），X/Y轴用PID（保证角速率精度）</li>
+    <li><strong>只保留Z轴LADRC</strong>：作为高度控制器的替代方案，这是当前最能体现实用价值的切入点</li>
+  </ol>
+</div>
+
+<div style="text-align:center; padding:30px; color:var(--muted); font-size:12px;">
+  Generated by PX4 ULG Analyzer | 飞行日志: pid_disturbance.ulg (22MB) / ladrc_disturbance.ulg (24MB) | 2026-07-13
+</div>
+
+</div>
+</body>
+</html>

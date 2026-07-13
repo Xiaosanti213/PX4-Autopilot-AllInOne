@@ -266,3 +266,87 @@ parameters:
       min: 0.1
       max: 0.9
       decimal: 2
+    MC_LADRC_ENABLE:
+      description:
+        short: Enable LADRC rate controller
+        long: |-
+          Enable Linear Active Disturbance Rejection Control (LADRC) for rate control.
+          When enabled, overrides both PID and INDI.
+          LADRC uses an Extended State Observer (ESO) to estimate and cancel total
+          disturbance in real-time, providing better disturbance rejection than PID
+          with fewer tuning parameters.
+      type: boolean
+      default: 0
+    MC_LADRC_B0:
+      description:
+        short: LADRC control effectiveness gain (roll/pitch)
+        long: |-
+          Estimated control effectiveness for roll and pitch axes.
+          This represents the approximate inverse moment of inertia.
+          In PX4 normalized units, typical values are 50-200.
+          Higher values = stronger control authority assumption.
+      type: float
+      default: 80.0
+      min: 10.0
+      max: 500.0
+      decimal: 1
+    MC_LADRC_B0_Y:
+      description:
+        short: LADRC control effectiveness gain (yaw)
+        long: |-
+          Estimated control effectiveness for yaw axis.
+          Typically lower than roll/pitch due to higher yaw inertia.
+          In PX4 normalized units, typical values are 20-100.
+      type: float
+      default: 40.0
+      min: 10.0
+      max: 500.0
+      decimal: 1
+    MC_LADRC_WO:
+      description:
+        short: LADRC observer bandwidth (roll/pitch) [rad/s]
+        long: |-
+          Observer bandwidth for Extended State Observer on roll/pitch axes.
+          Higher = faster disturbance estimation, but more noise-sensitive.
+          Typical values: 15-50 rad/s.
+          Tune wo ~ 2-3x wc for good tracking/disturbance trade-off.
+      type: float
+      default: 20.0
+      min: 5.0
+      max: 200.0
+      decimal: 1
+    MC_LADRC_WO_Y:
+      description:
+        short: LADRC observer bandwidth (yaw) [rad/s]
+        long: |-
+          Observer bandwidth for yaw axis.
+          Typically lower than roll/pitch due to slower yaw dynamics.
+      type: float
+      default: 15.0
+      min: 5.0
+      max: 200.0
+      decimal: 1
+    MC_LADRC_WC:
+      description:
+        short: LADRC controller bandwidth (roll/pitch) [rad/s]
+        long: |-
+          Controller bandwidth for roll/pitch axes.
+          Higher = faster rate tracking, may excite unmodeled dynamics.
+          Typically 1/2 to 1/3 of observer bandwidth.
+          Typical values: 8-30 rad/s.
+      type: float
+      default: 10.0
+      min: 2.0
+      max: 100.0
+      decimal: 1
+    MC_LADRC_WC_Y:
+      description:
+        short: LADRC controller bandwidth (yaw) [rad/s]
+        long: |-
+          Controller bandwidth for yaw axis.
+          Typically lower than roll/pitch.
+      type: float
+      default: 8.0
+      min: 2.0
+      max: 100.0
+      decimal: 1

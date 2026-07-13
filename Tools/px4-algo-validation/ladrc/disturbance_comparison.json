@@ -1,0 +1,2112 @@
+{
+  "file_a": "D:\\source\\PX4-Autopilot-AllInOne\\build\\px4_sitl_default\\rootfs\\log\\pid_disturbance.ulg",
+  "file_b": "D:\\source\\PX4-Autopilot-AllInOne\\build\\px4_sitl_default\\rootfs\\log\\ladrc_disturbance.ulg",
+  "label_a": "PID",
+  "label_b": "LADRC",
+  "duration_a_s": 99.19,
+  "duration_b_s": 107.61,
+  "wins_a": 21,
+  "wins_b": 6,
+  "total_metrics": 34,
+  "sections": [
+    {
+      "name": "Rate Tracking",
+      "metrics": [
+        {
+          "name": "roll",
+          "unit": "deg/s",
+          "value_a": 0.087,
+          "value_b": 3.0751,
+          "label_a": "0.09",
+          "label_b": "3.08",
+          "winner": "A",
+          "delta_pct": -97.2
+        },
+        {
+          "name": "pitch",
+          "unit": "deg/s",
+          "value_a": 0.0584,
+          "value_b": 3.567,
+          "label_a": "0.06",
+          "label_b": "3.57",
+          "winner": "A",
+          "delta_pct": -98.4
+        },
+        {
+          "name": "yaw",
+          "unit": "deg/s",
+          "value_a": 0.0295,
+          "value_b": 2.0464,
+          "label_a": "0.03",
+          "label_b": "2.05",
+          "winner": "A",
+          "delta_pct": -98.6
+        }
+      ]
+    },
+    {
+      "name": "Attitude Tracking",
+      "metrics": [
+        {
+          "name": "roll",
+          "unit": "deg",
+          "value_a": 1.69,
+          "value_b": 4.39,
+          "label_a": "1.7",
+          "label_b": "4.4",
+          "winner": "A",
+          "delta_pct": -61.5
+        },
+        {
+          "name": "pitch",
+          "unit": "deg",
+          "value_a": 16.81,
+          "value_b": 15.83,
+          "label_a": "16.8",
+          "label_b": "15.8",
+          "winner": "B",
+          "delta_pct": 6.2
+        },
+        {
+          "name": "yaw",
+          "unit": "deg",
+          "value_a": 6.83,
+          "value_b": 12.88,
+          "label_a": "6.8",
+          "label_b": "12.9",
+          "winner": "A",
+          "delta_pct": -47.0
+        }
+      ]
+    },
+    {
+      "name": "Position Tracking",
+      "metrics": [
+        {
+          "name": "3D RMS",
+          "unit": "m",
+          "value_a": 3.997,
+          "value_b": 19.0537,
+          "label_a": "3.997",
+          "label_b": "19.054",
+          "winner": "A",
+          "delta_pct": -79.0
+        },
+        {
+          "name": "x RMS",
+          "unit": "m",
+          "value_a": 1.6623,
+          "value_b": 19.0024,
+          "label_a": "1.662",
+          "label_b": "19.002",
+          "winner": "A",
+          "delta_pct": -91.3
+        },
+        {
+          "name": "y RMS",
+          "unit": "m",
+          "value_a": 0.2122,
+          "value_b": 1.3359,
+          "label_a": "0.212",
+          "label_b": "1.336",
+          "winner": "A",
+          "delta_pct": -84.1
+        },
+        {
+          "name": "z RMS",
+          "unit": "m",
+          "value_a": 3.6287,
+          "value_b": 0.4126,
+          "label_a": "3.629",
+          "label_b": "0.413",
+          "winner": "B",
+          "delta_pct": 779.5
+        }
+      ]
+    },
+    {
+      "name": "Vibration",
+      "metrics": [
+        {
+          "name": "Gyro x P2P",
+          "unit": "rad/s",
+          "value_a": 0.6302,
+          "value_b": 7.4147,
+          "label_a": "0.630",
+          "label_b": "7.415",
+          "winner": "A",
+          "delta_pct": -91.5
+        },
+        {
+          "name": "Gyro y P2P",
+          "unit": "rad/s",
+          "value_a": 1.7318,
+          "value_b": 11.1652,
+          "label_a": "1.732",
+          "label_b": "11.165",
+          "winner": "A",
+          "delta_pct": -84.5
+        },
+        {
+          "name": "Gyro z P2P",
+          "unit": "rad/s",
+          "value_a": 0.1807,
+          "value_b": 1.1582,
+          "label_a": "0.181",
+          "label_b": "1.158",
+          "winner": "A",
+          "delta_pct": -84.4
+        },
+        {
+          "name": "Accel x P2P",
+          "unit": "m/s²",
+          "value_a": 7.9682,
+          "value_b": 20.3287,
+          "label_a": "8.0",
+          "label_b": "20.3",
+          "winner": "A",
+          "delta_pct": -60.8
+        },
+        {
+          "name": "Accel y P2P",
+          "unit": "m/s²",
+          "value_a": 7.014,
+          "value_b": 20.3072,
+          "label_a": "7.0",
+          "label_b": "20.3",
+          "winner": "A",
+          "delta_pct": -65.5
+        },
+        {
+          "name": "Accel z P2P",
+          "unit": "m/s²",
+          "value_a": 9.1439,
+          "value_b": 28.4585,
+          "label_a": "9.1",
+          "label_b": "28.5",
+          "winner": "A",
+          "delta_pct": -67.9
+        },
+        {
+          "name": "Gyro level",
+          "unit": "",
+          "value_a": null,
+          "value_b": null,
+          "label_a": "high",
+          "label_b": "high",
+          "winner": null,
+          "delta_pct": null
+        },
+        {
+          "name": "Accel level",
+          "unit": "",
+          "value_a": null,
+          "value_b": null,
+          "label_a": "good",
+          "label_b": "acceptable",
+          "winner": null,
+          "delta_pct": null
+        }
+      ]
+    },
+    {
+      "name": "EKF Estimator",
+      "metrics": [
+        {
+          "name": "pos_test_ratio",
+          "unit": "",
+          "value_a": 0.0611,
+          "value_b": 0.0467,
+          "label_a": "0.06",
+          "label_b": "0.05",
+          "winner": "B",
+          "delta_pct": 30.8
+        },
+        {
+          "name": "vel_test_ratio",
+          "unit": "",
+          "value_a": 0.2485,
+          "value_b": 0.5417,
+          "label_a": "0.25",
+          "label_b": "0.54",
+          "winner": "A",
+          "delta_pct": -54.1
+        },
+        {
+          "name": "hgt_test_ratio",
+          "unit": "",
+          "value_a": 0.1217,
+          "value_b": 0.0344,
+          "label_a": "0.12",
+          "label_b": "0.03",
+          "winner": "B",
+          "delta_pct": 253.8
+        },
+        {
+          "name": "hdg_test_ratio",
+          "unit": "",
+          "value_a": 0.2,
+          "value_b": 0.2377,
+          "label_a": "0.20",
+          "label_b": "0.24",
+          "winner": "A",
+          "delta_pct": -15.9
+        },
+        {
+          "name": "Health",
+          "unit": "",
+          "value_a": null,
+          "value_b": null,
+          "label_a": "good",
+          "label_b": "marginal",
+          "winner": null,
+          "delta_pct": null
+        }
+      ]
+    },
+    {
+      "name": "Actuators",
+      "metrics": [
+        {
+          "name": "Saturation",
+          "unit": "%",
+          "value_a": 20.2,
+          "value_b": 38.6,
+          "label_a": "20.2",
+          "label_b": "38.6",
+          "winner": "A",
+          "delta_pct": -47.7
+        },
+        {
+          "name": "M0 mean",
+          "unit": "",
+          "value_a": 0.4882,
+          "value_b": 0.4933,
+          "label_a": "0.488",
+          "label_b": "0.493",
+          "winner": "B",
+          "delta_pct": -1.0
+        },
+        {
+          "name": "M1 mean",
+          "unit": "",
+          "value_a": 0.4892,
+          "value_b": 0.4749,
+          "label_a": "0.489",
+          "label_b": "0.475",
+          "winner": "A",
+          "delta_pct": 3.0
+        },
+        {
+          "name": "M2 mean",
+          "unit": "",
+          "value_a": 0.4889,
+          "value_b": 0.5204,
+          "label_a": "0.489",
+          "label_b": "0.520",
+          "winner": "B",
+          "delta_pct": -6.1
+        },
+        {
+          "name": "M3 mean",
+          "unit": "",
+          "value_a": 0.4881,
+          "value_b": 0.4793,
+          "label_a": "0.488",
+          "label_b": "0.479",
+          "winner": "A",
+          "delta_pct": 1.8
+        }
+      ]
+    },
+    {
+      "name": "Battery",
+      "metrics": [
+        {
+          "name": "Consumed",
+          "unit": "mAh",
+          "value_a": 0.0,
+          "value_b": 0.0,
+          "label_a": "0",
+          "label_b": "0",
+          "winner": null,
+          "delta_pct": null
+        },
+        {
+          "name": "Voltage drop",
+          "unit": "V",
+          "value_a": 0.0,
+          "value_b": 0.9,
+          "label_a": "0.00",
+          "label_b": "0.90",
+          "winner": "A",
+          "delta_pct": -100.0
+        },
+        {
+          "name": "Mean current",
+          "unit": "A",
+          "value_a": -1.0,
+          "value_b": -1.0,
+          "label_a": "-1.0",
+          "label_b": "-1.0",
+          "winner": null,
+          "delta_pct": 0.0
+        },
+        {
+          "name": "Mean power",
+          "unit": "W",
+          "value_a": -15.6,
+          "value_b": -15.6,
+          "label_a": "-15.6",
+          "label_b": "-15.6",
+          "winner": null,
+          "delta_pct": 0.0
+        }
+      ]
+    },
+    {
+      "name": "Overall",
+      "metrics": [
+        {
+          "name": "Score",
+          "unit": "",
+          "value_a": 53.0,
+          "value_b": 41.0,
+          "label_a": "53",
+          "label_b": "41",
+          "winner": "A",
+          "delta_pct": 29.3
+        },
+        {
+          "name": "Grade",
+          "unit": "",
+          "value_a": null,
+          "value_b": null,
+          "label_a": "F",
+          "label_b": "F",
+          "winner": null,
+          "delta_pct": null
+        }
+      ]
+    }
+  ],
+  "findings": [
+    "* Overall: PID score 12 pts higher (53 vs 41)",
+    "* PID better: Voltage drop (100%)",
+    "* PID better: yaw (99%)",
+    "* PID better: pitch (98%)",
+    "* LADRC better: z RMS (779%)",
+    "* LADRC better: hgt_test_ratio (254%)",
+    "* LADRC better: pos_test_ratio (31%)"
+  ],
+  "results_a": {
+    "flight_info": {
+      "duration_s": 99.19,
+      "armed": true,
+      "armed_time_s": 75.07,
+      "start_time_us": 0,
+      "end_time_us": 99192000,
+      "topics_recorded": [
+        "actuator_armed",
+        "actuator_controls_status_0",
+        "actuator_motors",
+        "actuator_outputs",
+        "battery_status",
+        "config_overrides",
+        "control_allocator_status",
+        "cpuload",
+        "distance_sensor",
+        "distance_sensor_mode_change_request",
+        "ekf2_timestamps",
+        "estimator_aid_src_baro_hgt",
+        "estimator_aid_src_fake_hgt",
+        "estimator_aid_src_fake_pos",
+        "estimator_aid_src_gnss_hgt",
+        "estimator_aid_src_gnss_pos",
+        "estimator_aid_src_gnss_vel",
+        "estimator_aid_src_gravity",
+        "estimator_aid_src_mag",
+        "estimator_aid_src_rng_hgt",
+        "estimator_baro_bias",
+        "estimator_event_flags",
+        "estimator_fusion_control",
+        "estimator_gnss_hgt_bias",
+        "estimator_gps_status",
+        "estimator_innovation_test_ratios",
+        "estimator_innovation_variances",
+        "estimator_innovations",
+        "estimator_sensor_bias",
+        "estimator_states",
+        "estimator_status",
+        "estimator_status_flags",
+        "event",
+        "failsafe_flags",
+        "failure_detector_status",
+        "gripper",
+        "home_position",
+        "landing_gear",
+        "manual_control_setpoint",
+        "navigator_status",
+        "parameter_update",
+        "position_setpoint_triplet",
+        "ranging_beacon",
+        "rate_ctrl_status",
+        "rtl_status",
+        "sensor_accel",
+        "sensor_baro",
+        "sensor_combined",
+        "sensor_gps",
+        "sensor_gyro",
+        "sensor_gyro_fft",
+        "sensor_mag",
+        "sensor_selection",
+        "sensors_status_imu",
+        "system_power",
+        "takeoff_status",
+        "telemetry_status",
+        "trajectory_setpoint",
+        "transponder_report",
+        "vehicle_acceleration",
+        "vehicle_air_data",
+        "vehicle_angular_velocity",
+        "vehicle_angular_velocity_groundtruth",
+        "vehicle_attitude",
+        "vehicle_attitude_groundtruth",
+        "vehicle_attitude_setpoint",
+        "vehicle_command",
+        "vehicle_command_ack",
+        "vehicle_constraints",
+        "vehicle_control_mode",
+        "vehicle_global_position_groundtruth",
+        "vehicle_gps_position",
+        "vehicle_imu",
+        "vehicle_imu_status",
+        "vehicle_land_detected",
+        "vehicle_local_position",
+        "vehicle_local_position_groundtruth",
+        "vehicle_local_position_setpoint",
+        "vehicle_magnetometer",
+        "vehicle_rates_setpoint",
+        "vehicle_status",
+        "vehicle_thrust_setpoint",
+        "vehicle_torque_setpoint",
+        "yaw_estimator_status"
+      ],
+      "topic_count": 84,
+      "topic_counts": {
+        "actuator_armed": 203,
+        "actuator_controls_status_0": 196,
+        "config_overrides": 195,
+        "cpuload": 197,
+        "distance_sensor_mode_change_request": 1,
+        "failure_detector_status": 203,
+        "failsafe_flags": 183,
+        "gripper": 1,
+        "home_position": 89,
+        "landing_gear": 3,
+        "manual_control_setpoint": 1,
+        "navigator_status": 196,
+        "parameter_update": 8,
+        "position_setpoint_triplet": 131,
+        "sensor_combined": 24438,
+        "sensor_selection": 1,
+        "sensors_status_imu": 490,
+        "trajectory_setpoint": 490,
+        "transponder_report": 1,
+        "vehicle_acceleration": 1956,
+        "vehicle_air_data": 1955,
+        "vehicle_angular_velocity": 9776,
+        "vehicle_attitude": 24438,
+        "vehicle_attitude_setpoint": 1956,
+        "vehicle_command": 8,
+        "vehicle_command_ack": 6,
+        "vehicle_control_mode": 203,
+        "vehicle_gps_position": 783,
+        "vehicle_land_detected": 386,
+        "vehicle_local_position": 12219,
+        "vehicle_local_position_setpoint": 979,
+        "vehicle_magnetometer": 1397,
+        "vehicle_rates_setpoint": 4889,
+        "vehicle_status": 203,
+        "ranging_beacon": 197,
+        "actuator_outputs": 979,
+        "control_allocator_status": 490,
+        "rate_ctrl_status": 490,
+        "estimator_aid_src_baro_hgt": 1956,
+        "estimator_aid_src_fake_hgt": 1,
+        "estimator_aid_src_fake_pos": 6,
+        "estimator_aid_src_gnss_hgt": 783,
+        "estimator_aid_src_gnss_pos": 783,
+        "estimator_aid_src_gnss_vel": 783,
+        "estimator_aid_src_gravity": 9776,
+        "estimator_aid_src_mag": 1397,
+        "estimator_aid_src_rng_hgt": 4888,
+        "estimator_event_flags": 99,
+        "estimator_fusion_control": 9776,
+        "estimator_gps_status": 783,
+        "estimator_innovation_test_ratios": 9776,
+        "estimator_innovation_variances": 9776,
+        "estimator_innovations": 9776,
+        "estimator_sensor_bias": 525,
+        "estimator_states": 9776,
+        "estimator_status": 9776,
+        "estimator_status_flags": 112,
+        "battery_status": 490,
+        "distance_sensor": 4888,
+        "actuator_motors": 979,
+        "vehicle_thrust_setpoint": 4889,
+        "vehicle_torque_setpoint": 4889,
+        "vehicle_angular_velocity_groundtruth": 9776,
+        "vehicle_attitude_groundtruth": 9776,
+        "vehicle_global_position_groundtruth": 979,
+        "vehicle_local_position_groundtruth": 4889,
+        "ekf2_timestamps": 24438,
+        "event": 22,
+        "estimator_gnss_hgt_bias": 511,
+        "estimator_baro_bias": 1951,
+        "vehicle_imu": 195,
+        "system_power": 195,
+        "vehicle_imu_status": 97,
+        "sensor_mag": 97,
+        "sensor_gyro": 97,
+        "sensor_gps": 97,
+        "sensor_baro": 97,
+        "sensor_accel": 97,
+        "telemetry_status": 388,
+        "vehicle_constraints": 97,
+        "takeoff_status": 14,
+        "rtl_status": 48,
+        "yaw_estimator_status": 9012,
+        "sensor_gyro_fft": 11
+      },
+      "info": {}
+    },
+    "attitude": {
+      "euler_deg": {
+        "roll": {
+          "mean": -0.9139,
+          "min": -4.8999,
+          "max": 3.312,
+          "std": 1.3499,
+          "rms": 1.6302,
+          "p95": 0.9647
+        },
+        "pitch": {
+          "mean": -9.5081,
+          "min": -42.6182,
+          "max": 3.7172,
+          "std": 13.8266,
+          "rms": 16.7804,
+          "p95": 1.161
+        },
+        "yaw": {
+          "mean": 4.6024,
+          "min": -6.4927,
+          "max": 13.0878,
+          "std": 5.0323,
+          "rms": 6.8195,
+          "p95": 11.2813
+        }
+      },
+      "angular_rate_rad_s": {
+        "roll": {
+          "mean": 0.0017,
+          "min": -0.3768,
+          "max": 0.357,
+          "std": 0.0832,
+          "rms": 0.0832,
+          "p95": 0.1456
+        },
+        "pitch": {
+          "mean": -0.0,
+          "min": -1.3093,
+          "max": 1.1418,
+          "std": 0.1079,
+          "rms": 0.1079,
+          "p95": 0.0775
+        },
+        "yaw": {
+          "mean": 0.0021,
+          "min": -0.11,
+          "max": 0.2559,
+          "std": 0.0299,
+          "rms": 0.0299,
+          "p95": 0.0457
+        }
+      },
+      "sample_count": 24438,
+      "sample_rate_hz": 246.4
+    },
+    "rate_tracking": {
+      "available": true,
+      "sample_count": 4889,
+      "rate_source": "vehicle_angular_velocity",
+      "roll": {
+        "setpoint_stats": {
+          "mean": 0.0044,
+          "min": -0.2008,
+          "max": 0.2995,
+          "std": 0.0472,
+          "rms": 0.0474,
+          "p95": 0.0833
+        },
+        "actual_stats": {
+          "mean": 0.0017,
+          "min": -0.3768,
+          "max": 0.357,
+          "std": 0.0832,
+          "rms": 0.0832,
+          "p95": 0.1456
+        },
+        "error_stats": {
+          "mean": 0.0027,
+          "min": -0.3791,
+          "max": 0.4865,
+          "std": 0.0869,
+          "rms": 0.087,
+          "p95": 0.1524
+        },
+        "abs_error": {
+          "mean_deg_s": 0.0624,
+          "max_deg_s": 0.4865,
+          "rms_deg_s": 0.087
+        }
+      },
+      "pitch": {
+        "setpoint_stats": {
+          "mean": -0.0007,
+          "min": -1.2132,
+          "max": 1.2193,
+          "std": 0.0995,
+          "rms": 0.0995,
+          "p95": 0.0346
+        },
+        "actual_stats": {
+          "mean": -0.0,
+          "min": -1.3093,
+          "max": 1.1418,
+          "std": 0.1079,
+          "rms": 0.1079,
+          "p95": 0.0775
+        },
+        "error_stats": {
+          "mean": -0.0006,
+          "min": -0.8329,
+          "max": 0.5789,
+          "std": 0.0584,
+          "rms": 0.0584,
+          "p95": 0.0763
+        },
+        "abs_error": {
+          "mean_deg_s": 0.0343,
+          "max_deg_s": 0.8329,
+          "rms_deg_s": 0.0584
+        }
+      },
+      "yaw": {
+        "setpoint_stats": {
+          "mean": 0.0021,
+          "min": -0.0863,
+          "max": 0.3261,
+          "std": 0.0319,
+          "rms": 0.032,
+          "p95": 0.0477
+        },
+        "actual_stats": {
+          "mean": 0.0021,
+          "min": -0.11,
+          "max": 0.2559,
+          "std": 0.0299,
+          "rms": 0.0299,
+          "p95": 0.0457
+        },
+        "error_stats": {
+          "mean": 0.0,
+          "min": -0.2097,
+          "max": 0.2409,
+          "std": 0.0295,
+          "rms": 0.0295,
+          "p95": 0.0404
+        },
+        "abs_error": {
+          "mean_deg_s": 0.0185,
+          "max_deg_s": 0.2409,
+          "rms_deg_s": 0.0295
+        }
+      }
+    },
+    "attitude_tracking": {
+      "available": true,
+      "sample_count": 1956,
+      "roll": {
+        "setpoint_stats": {
+          "mean": -0.8593,
+          "min": -5.4,
+          "max": 3.8616,
+          "std": 1.4184,
+          "rms": 1.6584,
+          "p95": 0.9567
+        },
+        "actual_stats": {
+          "mean": 0.0042,
+          "min": -0.2102,
+          "max": 0.1392,
+          "std": 0.063,
+          "rms": 0.0632,
+          "p95": 0.1011
+        },
+        "error_stats": {
+          "mean": -0.8636,
+          "min": -5.4512,
+          "max": 3.9687,
+          "std": 1.4536,
+          "rms": 1.6908,
+          "p95": 0.9763
+        },
+        "abs_error": {
+          "mean_deg": 1.18,
+          "max_deg": 5.45,
+          "rms_deg": 1.69
+        }
+      },
+      "pitch": {
+        "setpoint_stats": {
+          "mean": -9.5111,
+          "min": -43.1854,
+          "max": 3.8953,
+          "std": 13.8612,
+          "rms": 16.8105,
+          "p95": 1.243
+        },
+        "actual_stats": {
+          "mean": -0.0145,
+          "min": -0.171,
+          "max": 0.0813,
+          "std": 0.0493,
+          "rms": 0.0514,
+          "p95": 0.0516
+        },
+        "error_stats": {
+          "mean": -9.4966,
+          "min": -43.2011,
+          "max": 3.8916,
+          "std": 13.8715,
+          "rms": 16.8108,
+          "p95": 1.2422
+        },
+        "abs_error": {
+          "mean_deg": 9.93,
+          "max_deg": 43.2,
+          "rms_deg": 16.81
+        }
+      },
+      "yaw": {
+        "setpoint_stats": {
+          "mean": 4.583,
+          "min": -6.4177,
+          "max": 12.6072,
+          "std": 5.0178,
+          "rms": 6.7957,
+          "p95": 10.9592
+        },
+        "actual_stats": {
+          "mean": 0.1246,
+          "min": -0.2117,
+          "max": 0.8118,
+          "std": 0.2365,
+          "rms": 0.2673,
+          "p95": 0.607
+        },
+        "error_stats": {
+          "mean": 4.4583,
+          "min": -7.029,
+          "max": 12.4826,
+          "std": 5.1782,
+          "rms": 6.8331,
+          "p95": 10.9542
+        },
+        "abs_error": {
+          "mean_deg": 5.11,
+          "max_deg": 12.48,
+          "rms_deg": 6.83
+        }
+      }
+    },
+    "position_tracking": {
+      "available": true,
+      "sample_count": 12219,
+      "x": {
+        "setpoint_stats": {
+          "mean": -0.0617,
+          "min": -0.0774,
+          "max": 0.0381,
+          "std": 0.035,
+          "rms": 0.0709,
+          "p95": 0.0368
+        },
+        "actual_stats": {
+          "mean": -1.1661,
+          "min": -3.8715,
+          "max": 0.0153,
+          "std": 1.2262,
+          "rms": 1.6921,
+          "p95": 0.0002
+        },
+        "error_stats": {
+          "mean": 1.1044,
+          "min": -0.0911,
+          "max": 3.7964,
+          "std": 1.2424,
+          "rms": 1.6623,
+          "p95": 2.7009
+        },
+        "abs_error": {
+          "mean_m": 1.1488,
+          "max_m": 3.7964,
+          "rms_m": 1.6623
+        }
+      },
+      "y": {
+        "setpoint_stats": {
+          "mean": -0.0693,
+          "min": -0.2413,
+          "max": -0.0454,
+          "std": 0.0602,
+          "rms": 0.0918,
+          "p95": -0.0454
+        },
+        "actual_stats": {
+          "mean": -0.155,
+          "min": -0.5567,
+          "max": 0.2285,
+          "std": 0.2061,
+          "rms": 0.2579,
+          "p95": 0.0682
+        },
+        "error_stats": {
+          "mean": 0.0857,
+          "min": -0.2739,
+          "max": 0.5113,
+          "std": 0.1941,
+          "rms": 0.2122,
+          "p95": 0.463
+        },
+        "abs_error": {
+          "mean_m": 0.152,
+          "max_m": 0.5113,
+          "rms_m": 0.2122
+        }
+      },
+      "z": {
+        "setpoint_stats": {
+          "mean": -4.2523,
+          "min": -5.185,
+          "max": 0.3209,
+          "std": 1.6706,
+          "rms": 4.5687,
+          "p95": -0.1935
+        },
+        "actual_stats": {
+          "mean": -1.2854,
+          "min": -5.2064,
+          "max": 0.2506,
+          "std": 1.9627,
+          "rms": 2.3462,
+          "p95": -0.0021
+        },
+        "error_stats": {
+          "mean": -2.9669,
+          "min": -5.1281,
+          "max": 0.0803,
+          "std": 2.0894,
+          "rms": 3.6287,
+          "p95": -0.067
+        },
+        "abs_error": {
+          "mean_m": 2.9678,
+          "max_m": 5.1281,
+          "rms_m": 3.6287
+        }
+      },
+      "error_3d": {
+        "mean_m": 3.6126,
+        "max_m": 5.5447,
+        "rms_m": 3.997
+      },
+      "altitude": {
+        "min_m": -0.29,
+        "max_m": 5.38,
+        "mean_m": 1.78
+      }
+    },
+    "vibration": {
+      "available": true,
+      "gyro": {
+        "x": {
+          "peak_to_peak_rad_s": 0.6302,
+          "rms_rad_s": 0.1212,
+          "std_rad_s": 0.1211
+        },
+        "y": {
+          "peak_to_peak_rad_s": 1.7318,
+          "rms_rad_s": 0.1418,
+          "std_rad_s": 0.1408
+        },
+        "z": {
+          "peak_to_peak_rad_s": 0.1807,
+          "rms_rad_s": 0.0336,
+          "std_rad_s": 0.0336
+        }
+      },
+      "gyro_level": "high",
+      "accel": {
+        "x": {
+          "peak_to_peak_m_s2": 7.9682,
+          "rms_m_s2": 2.6703,
+          "std_m_s2": 2.1819
+        },
+        "y": {
+          "peak_to_peak_m_s2": 7.014,
+          "rms_m_s2": 1.3448,
+          "std_m_s2": 1.3446
+        },
+        "z": {
+          "peak_to_peak_m_s2": 9.1439,
+          "rms_m_s2": 9.6214,
+          "std_m_s2": 1.6539
+        }
+      },
+      "accel_level": "good"
+    },
+    "estimator": {
+      "available": true,
+      "sample_count": 9776,
+      "pos_test_ratio": {
+        "mean": 0.0201,
+        "max": 0.0611,
+        "p95": 0.053
+      },
+      "vel_test_ratio": {
+        "mean": 0.0755,
+        "max": 0.2485,
+        "p95": 0.1924
+      },
+      "hgt_test_ratio": {
+        "mean": 0.0143,
+        "max": 0.1217,
+        "p95": 0.0382
+      },
+      "hdg_test_ratio": {
+        "mean": 0.0887,
+        "max": 0.2,
+        "p95": 0.1406
+      },
+      "hagl_test_ratio": {
+        "mean": 0.0313,
+        "max": 0.3062,
+        "p95": 0.1007
+      },
+      "output_tracking_error_0": {
+        "mean": 0.0021,
+        "min": 0.0,
+        "max": 0.0841,
+        "std": 0.0044,
+        "rms": 0.0049,
+        "p95": 0.0047
+      },
+      "output_tracking_error_1": {
+        "mean": 0.0167,
+        "min": 0.0002,
+        "max": 0.1424,
+        "std": 0.0122,
+        "rms": 0.0207,
+        "p95": 0.0373
+      },
+      "output_tracking_error_2": {
+        "mean": 0.0298,
+        "min": 0.0003,
+        "max": 0.1147,
+        "std": 0.0209,
+        "rms": 0.0364,
+        "p95": 0.068
+      },
+      "innovations": {
+        "gps_hpos_x": {
+          "mean": 0.0008,
+          "min": -0.203,
+          "max": 0.1894,
+          "std": 0.0792,
+          "rms": 0.0792,
+          "p95": 0.1462
+        },
+        "gps_hpos_y": {
+          "mean": 0.013,
+          "min": -0.2937,
+          "max": 0.2827,
+          "std": 0.0951,
+          "rms": 0.096,
+          "p95": 0.1707
+        },
+        "gps_vpos": {
+          "mean": 0.0463,
+          "min": -0.3822,
+          "max": 0.5478,
+          "std": 0.1848,
+          "rms": 0.1906,
+          "p95": 0.4477
+        },
+        "gps_hvel_x": {
+          "mean": 0.0096,
+          "min": -0.3471,
+          "max": 0.32,
+          "std": 0.1262,
+          "rms": 0.1265,
+          "p95": 0.2342
+        },
+        "gps_hvel_y": {
+          "mean": 0.018,
+          "min": -0.5644,
+          "max": 0.5217,
+          "std": 0.166,
+          "rms": 0.167,
+          "p95": 0.2951
+        },
+        "gps_vvel": {
+          "mean": 0.0245,
+          "min": -0.3234,
+          "max": 0.3628,
+          "std": 0.1116,
+          "rms": 0.1142,
+          "p95": 0.2414
+        },
+        "baro_vpos": {
+          "mean": 0.0321,
+          "min": -0.4943,
+          "max": 0.5211,
+          "std": 0.1472,
+          "rms": 0.1507,
+          "p95": 0.3317
+        },
+        "heading": {
+          "mean": 0.0116,
+          "min": -0.0431,
+          "max": 0.0841,
+          "std": 0.0147,
+          "rms": 0.0187,
+          "p95": 0.0387
+        },
+        "mag_x": {
+          "mean": -0.0021,
+          "min": -0.2385,
+          "max": 0.0532,
+          "std": 0.0254,
+          "rms": 0.0255,
+          "p95": 0.0217
+        },
+        "mag_y": {
+          "mean": -0.0024,
+          "min": -0.0725,
+          "max": 0.0486,
+          "std": 0.0131,
+          "rms": 0.0134,
+          "p95": 0.0185
+        },
+        "mag_z": {
+          "mean": -0.0043,
+          "min": -0.4917,
+          "max": 0.1002,
+          "std": 0.048,
+          "rms": 0.0482,
+          "p95": 0.0325
+        }
+      },
+      "health": "good"
+    },
+    "battery": {
+      "available": true,
+      "sample_count": 490,
+      "voltage_v": {
+        "start": 16.2,
+        "end": 16.2,
+        "min": 15.3,
+        "max": 16.2,
+        "mean": 15.65
+      },
+      "voltage_drop_v": 0.0,
+      "current_a": {
+        "mean": -1.0,
+        "max": -1.0,
+        "min": -1.0
+      },
+      "consumed_mah": 0.0,
+      "remaining_pct": {
+        "start": 98.9,
+        "end": 78.5
+      },
+      "power_w": {
+        "mean": -15.6,
+        "max": -15.3
+      }
+    },
+    "flight_modes": {
+      "available": true,
+      "sample_count": 203,
+      "mode_times_s": {
+        "Hold": 77.42,
+        "Unknown(17)": 7.42,
+        "Unknown(18)": 12.85
+      },
+      "transitions": [
+        {
+          "time_s": 26.09,
+          "from": "Hold",
+          "to": "Unknown(17)"
+        },
+        {
+          "time_s": 33.5,
+          "from": "Unknown(17)",
+          "to": "Hold"
+        },
+        {
+          "time_s": 85.34,
+          "from": "Hold",
+          "to": "Unknown(18)"
+        },
+        {
+          "time_s": 98.2,
+          "from": "Unknown(18)",
+          "to": "Hold"
+        }
+      ],
+      "transition_count": 4,
+      "modes_used": [
+        "Unknown(18)",
+        "Hold",
+        "Unknown(17)"
+      ]
+    },
+    "actuators": {
+      "available": true,
+      "source": "actuator_motors",
+      "sample_count": 979,
+      "motors": {
+        "motor_0": {
+          "mean": 0.4882,
+          "min": 0.0,
+          "max": 1.0,
+          "std": 0.3694,
+          "saturation_pct": 20.4
+        },
+        "motor_1": {
+          "mean": 0.4892,
+          "min": 0.0,
+          "max": 1.0,
+          "std": 0.3691,
+          "saturation_pct": 20.2
+        },
+        "motor_2": {
+          "mean": 0.4889,
+          "min": 0.0,
+          "max": 1.0,
+          "std": 0.3692,
+          "saturation_pct": 20.2
+        },
+        "motor_3": {
+          "mean": 0.4881,
+          "min": 0.0,
+          "max": 1.0,
+          "std": 0.369,
+          "saturation_pct": 20.2
+        }
+      },
+      "total_saturation_pct": 20.2
+    },
+    "controller_config": {
+      "indi_enabled": false,
+      "controller_type": "PID",
+      "parameters": {
+        "MC_ROLLRATE_P": 0.15,
+        "MC_ROLLRATE_I": 0.2,
+        "MC_ROLLRATE_D": 0.003,
+        "MC_PITCHRATE_P": 0.15,
+        "MC_PITCHRATE_I": 0.2,
+        "MC_PITCHRATE_D": 0.003,
+        "MC_YAWRATE_P": 0.2,
+        "MC_YAWRATE_I": 0.1,
+        "MC_YAWRATE_D": 0.0,
+        "MC_INDI_GAIN_P": 2.5,
+        "MC_INDI_GAIN_Y": 1.5,
+        "MC_INDI_FILTER": 0.5,
+        "MC_ROLL_P": 4.0,
+        "MC_PITCH_P": 4.0,
+        "MC_YAW_P": 2.8,
+        "MPC_XY_VEL_MAX": 12.0,
+        "MPC_Z_VEL_MAX_UP": 3.0,
+        "MPC_Z_VEL_MAX_DN": 1.5,
+        "MPC_XY_CRUISE": 5.0
+      }
+    },
+    "performance_rating": {
+      "score": 53,
+      "grade": "F",
+      "summary": "4 issue(s) identified, score 53/100 (grade F).",
+      "issues": [
+        "Attitude tracking pitch RMS error high: 16.8 deg",
+        "3D position tracking RMS error high: 4.00 m",
+        "High gyroscope vibration detected",
+        "Actuator saturation high: 20.2%"
+      ]
+    }
+  },
+  "results_b": {
+    "flight_info": {
+      "duration_s": 107.61,
+      "armed": true,
+      "armed_time_s": 81.65,
+      "start_time_us": 0,
+      "end_time_us": 107608000,
+      "topics_recorded": [
+        "actuator_armed",
+        "actuator_controls_status_0",
+        "actuator_motors",
+        "actuator_outputs",
+        "battery_status",
+        "config_overrides",
+        "control_allocator_status",
+        "cpuload",
+        "distance_sensor",
+        "distance_sensor_mode_change_request",
+        "ekf2_timestamps",
+        "estimator_aid_src_baro_hgt",
+        "estimator_aid_src_fake_hgt",
+        "estimator_aid_src_fake_pos",
+        "estimator_aid_src_gnss_hgt",
+        "estimator_aid_src_gnss_pos",
+        "estimator_aid_src_gnss_vel",
+        "estimator_aid_src_gravity",
+        "estimator_aid_src_mag",
+        "estimator_aid_src_rng_hgt",
+        "estimator_baro_bias",
+        "estimator_event_flags",
+        "estimator_fusion_control",
+        "estimator_gnss_hgt_bias",
+        "estimator_gps_status",
+        "estimator_innovation_test_ratios",
+        "estimator_innovation_variances",
+        "estimator_innovations",
+        "estimator_sensor_bias",
+        "estimator_states",
+        "estimator_status",
+        "estimator_status_flags",
+        "event",
+        "failsafe_flags",
+        "failure_detector_status",
+        "gripper",
+        "home_position",
+        "landing_gear",
+        "manual_control_setpoint",
+        "navigator_status",
+        "parameter_update",
+        "position_setpoint_triplet",
+        "ranging_beacon",
+        "rate_ctrl_status",
+        "rtl_status",
+        "sensor_accel",
+        "sensor_baro",
+        "sensor_combined",
+        "sensor_gps",
+        "sensor_gyro",
+        "sensor_gyro_fft",
+        "sensor_mag",
+        "sensor_selection",
+        "sensors_status_imu",
+        "system_power",
+        "takeoff_status",
+        "telemetry_status",
+        "trajectory_setpoint",
+        "transponder_report",
+        "vehicle_acceleration",
+        "vehicle_air_data",
+        "vehicle_angular_velocity",
+        "vehicle_angular_velocity_groundtruth",
+        "vehicle_attitude",
+        "vehicle_attitude_groundtruth",
+        "vehicle_attitude_setpoint",
+        "vehicle_command",
+        "vehicle_command_ack",
+        "vehicle_constraints",
+        "vehicle_control_mode",
+        "vehicle_global_position_groundtruth",
+        "vehicle_gps_position",
+        "vehicle_imu",
+        "vehicle_imu_status",
+        "vehicle_land_detected",
+        "vehicle_local_position",
+        "vehicle_local_position_groundtruth",
+        "vehicle_local_position_setpoint",
+        "vehicle_magnetometer",
+        "vehicle_rates_setpoint",
+        "vehicle_status",
+        "vehicle_thrust_setpoint",
+        "vehicle_torque_setpoint",
+        "yaw_estimator_status"
+      ],
+      "topic_count": 84,
+      "topic_counts": {
+        "actuator_armed": 481,
+        "actuator_controls_status_0": 213,
+        "config_overrides": 212,
+        "cpuload": 213,
+        "distance_sensor_mode_change_request": 1,
+        "failure_detector_status": 465,
+        "failsafe_flags": 262,
+        "gripper": 1,
+        "home_position": 90,
+        "landing_gear": 2,
+        "manual_control_setpoint": 1,
+        "navigator_status": 208,
+        "parameter_update": 8,
+        "position_setpoint_triplet": 126,
+        "sensor_combined": 26546,
+        "sensor_selection": 1,
+        "sensors_status_imu": 532,
+        "trajectory_setpoint": 532,
+        "transponder_report": 1,
+        "vehicle_acceleration": 2125,
+        "vehicle_air_data": 2125,
+        "vehicle_angular_velocity": 10620,
+        "vehicle_attitude": 26546,
+        "vehicle_attitude_setpoint": 2125,
+        "vehicle_command": 9,
+        "vehicle_command_ack": 7,
+        "vehicle_control_mode": 481,
+        "vehicle_gps_position": 851,
+        "vehicle_land_detected": 374,
+        "vehicle_local_position": 13274,
+        "vehicle_local_position_setpoint": 1063,
+        "vehicle_magnetometer": 1514,
+        "vehicle_rates_setpoint": 5311,
+        "vehicle_status": 481,
+        "ranging_beacon": 214,
+        "actuator_outputs": 1063,
+        "control_allocator_status": 532,
+        "rate_ctrl_status": 532,
+        "estimator_aid_src_baro_hgt": 2125,
+        "estimator_aid_src_fake_hgt": 1,
+        "estimator_aid_src_fake_pos": 6,
+        "estimator_aid_src_gnss_hgt": 851,
+        "estimator_aid_src_gnss_pos": 851,
+        "estimator_aid_src_gnss_vel": 851,
+        "estimator_aid_src_gravity": 10620,
+        "estimator_aid_src_mag": 1515,
+        "estimator_aid_src_rng_hgt": 5310,
+        "estimator_event_flags": 108,
+        "estimator_fusion_control": 10620,
+        "estimator_gps_status": 851,
+        "estimator_innovation_test_ratios": 10620,
+        "estimator_innovation_variances": 10620,
+        "estimator_innovations": 10620,
+        "estimator_sensor_bias": 270,
+        "estimator_states": 10620,
+        "estimator_status": 10620,
+        "estimator_status_flags": 147,
+        "battery_status": 532,
+        "distance_sensor": 5310,
+        "actuator_motors": 1063,
+        "vehicle_thrust_setpoint": 5311,
+        "vehicle_torque_setpoint": 5311,
+        "vehicle_angular_velocity_groundtruth": 10620,
+        "vehicle_attitude_groundtruth": 10620,
+        "vehicle_global_position_groundtruth": 1063,
+        "vehicle_local_position_groundtruth": 5311,
+        "ekf2_timestamps": 26546,
+        "event": 511,
+        "estimator_gnss_hgt_bias": 618,
+        "estimator_baro_bias": 2118,
+        "vehicle_imu": 212,
+        "system_power": 212,
+        "vehicle_imu_status": 106,
+        "sensor_mag": 106,
+        "sensor_gyro": 106,
+        "sensor_gps": 106,
+        "sensor_baro": 106,
+        "sensor_accel": 106,
+        "telemetry_status": 424,
+        "vehicle_constraints": 106,
+        "takeoff_status": 9,
+        "rtl_status": 53,
+        "yaw_estimator_status": 9767,
+        "sensor_gyro_fft": 2
+      },
+      "info": {}
+    },
+    "attitude": {
+      "euler_deg": {
+        "roll": {
+          "mean": -6.178,
+          "min": -179.9764,
+          "max": 179.9997,
+          "std": 65.6269,
+          "rms": 65.9171,
+          "p95": 114.4369
+        },
+        "pitch": {
+          "mean": -3.854,
+          "min": -89.2057,
+          "max": 86.4022,
+          "std": 33.6027,
+          "rms": 33.823,
+          "p95": 48.1644
+        },
+        "yaw": {
+          "mean": 3.9446,
+          "min": -179.9795,
+          "max": 179.994,
+          "std": 73.8964,
+          "rms": 74.0016,
+          "p95": 139.182
+        }
+      },
+      "angular_rate_rad_s": {
+        "roll": {
+          "mean": 0.0066,
+          "min": -5.0874,
+          "max": 4.6521,
+          "std": 1.8491,
+          "rms": 1.8491,
+          "p95": 3.163
+        },
+        "pitch": {
+          "mean": 0.0674,
+          "min": -7.9063,
+          "max": 7.8187,
+          "std": 2.589,
+          "rms": 2.5898,
+          "p95": 4.586
+        },
+        "yaw": {
+          "mean": -0.1011,
+          "min": -0.7868,
+          "max": 0.4753,
+          "std": 0.2891,
+          "rms": 0.3063,
+          "p95": 0.3467
+        }
+      },
+      "sample_count": 26546,
+      "sample_rate_hz": 246.7
+    },
+    "rate_tracking": {
+      "available": true,
+      "sample_count": 5311,
+      "rate_source": "vehicle_angular_velocity",
+      "roll": {
+        "setpoint_stats": {
+          "mean": 0.0217,
+          "min": -3.8397,
+          "max": 3.8397,
+          "std": 2.4354,
+          "rms": 2.4355,
+          "p95": 3.8397
+        },
+        "actual_stats": {
+          "mean": 0.0066,
+          "min": -5.0874,
+          "max": 4.6521,
+          "std": 1.8491,
+          "rms": 1.8491,
+          "p95": 3.163
+        },
+        "error_stats": {
+          "mean": 0.0151,
+          "min": -7.2225,
+          "max": 8.8053,
+          "std": 3.0751,
+          "rms": 3.0751,
+          "p95": 5.4565
+        },
+        "abs_error": {
+          "mean_deg_s": 2.2496,
+          "max_deg_s": 8.8053,
+          "rms_deg_s": 3.0751
+        }
+      },
+      "pitch": {
+        "setpoint_stats": {
+          "mean": 0.0691,
+          "min": -3.8397,
+          "max": 3.8397,
+          "std": 2.2302,
+          "rms": 2.2313,
+          "p95": 3.8397
+        },
+        "actual_stats": {
+          "mean": 0.0674,
+          "min": -7.9063,
+          "max": 7.8187,
+          "std": 2.589,
+          "rms": 2.5898,
+          "p95": 4.586
+        },
+        "error_stats": {
+          "mean": 0.0017,
+          "min": -11.6381,
+          "max": 11.2035,
+          "std": 3.567,
+          "rms": 3.567,
+          "p95": 6.2295
+        },
+        "abs_error": {
+          "mean_deg_s": 2.4993,
+          "max_deg_s": 11.6381,
+          "rms_deg_s": 3.567
+        }
+      },
+      "yaw": {
+        "setpoint_stats": {
+          "mean": -0.4884,
+          "min": -3.4907,
+          "max": 3.4907,
+          "std": 2.2412,
+          "rms": 2.2938,
+          "p95": 3.4907
+        },
+        "actual_stats": {
+          "mean": -0.1011,
+          "min": -0.7868,
+          "max": 0.4753,
+          "std": 0.2891,
+          "rms": 0.3063,
+          "p95": 0.3467
+        },
+        "error_stats": {
+          "mean": -0.3873,
+          "min": -3.6327,
+          "max": 3.8836,
+          "std": 2.0094,
+          "rms": 2.0464,
+          "p95": 3.1753
+        },
+        "abs_error": {
+          "mean_deg_s": 1.5545,
+          "max_deg_s": 3.8836,
+          "rms_deg_s": 2.0464
+        }
+      }
+    },
+    "attitude_tracking": {
+      "available": true,
+      "sample_count": 2125,
+      "roll": {
+        "setpoint_stats": {
+          "mean": -0.4558,
+          "min": -25.2434,
+          "max": 31.3302,
+          "std": 4.3715,
+          "rms": 4.3952,
+          "p95": 3.6268
+        },
+        "actual_stats": {
+          "mean": 0.0417,
+          "min": -0.0554,
+          "max": 0.4642,
+          "std": 0.0668,
+          "rms": 0.0787,
+          "p95": 0.1294
+        },
+        "error_stats": {
+          "mean": -0.4975,
+          "min": -25.2369,
+          "max": 31.3624,
+          "std": 4.3654,
+          "rms": 4.3936,
+          "p95": 3.5455
+        },
+        "abs_error": {
+          "mean_deg": 1.8,
+          "max_deg": 31.36,
+          "rms_deg": 4.39
+        }
+      },
+      "pitch": {
+        "setpoint_stats": {
+          "mean": -12.0943,
+          "min": -44.9466,
+          "max": 17.0954,
+          "std": 10.2174,
+          "rms": 15.8325,
+          "p95": 1.1404
+        },
+        "actual_stats": {
+          "mean": -0.0314,
+          "min": -0.5051,
+          "max": 0.0933,
+          "std": 0.0732,
+          "rms": 0.0797,
+          "p95": 0.0515
+        },
+        "error_stats": {
+          "mean": -12.0629,
+          "min": -44.9015,
+          "max": 17.1184,
+          "std": 10.2452,
+          "rms": 15.8265,
+          "p95": 1.163
+        },
+        "abs_error": {
+          "mean_deg": 12.82,
+          "max_deg": 44.9,
+          "rms_deg": 15.83
+        }
+      },
+      "yaw": {
+        "setpoint_stats": {
+          "mean": 0.1787,
+          "min": -11.8949,
+          "max": 80.0249,
+          "std": 13.0005,
+          "rms": 13.0017,
+          "p95": 3.7816
+        },
+        "actual_stats": {
+          "mean": 0.0286,
+          "min": -0.3403,
+          "max": 0.8095,
+          "std": 0.2868,
+          "rms": 0.2882,
+          "p95": 0.6412
+        },
+        "error_stats": {
+          "mean": 0.1501,
+          "min": -12.1843,
+          "max": 79.3779,
+          "std": 12.8824,
+          "rms": 12.8832,
+          "p95": 3.3228
+        },
+        "abs_error": {
+          "mean_deg": 4.82,
+          "max_deg": 79.38,
+          "rms_deg": 12.88
+        }
+      }
+    },
+    "position_tracking": {
+      "available": true,
+      "sample_count": 13274,
+      "x": {
+        "setpoint_stats": {
+          "mean": -0.0697,
+          "min": -0.0712,
+          "max": -0.0687,
+          "std": 0.0003,
+          "rms": 0.0697,
+          "p95": -0.0696
+        },
+        "actual_stats": {
+          "mean": -13.7066,
+          "min": -28.6119,
+          "max": 0.5074,
+          "std": 13.2333,
+          "rms": 19.0524,
+          "p95": 0.0367
+        },
+        "error_stats": {
+          "mean": 13.6369,
+          "min": -0.577,
+          "max": 28.5423,
+          "std": 13.2334,
+          "rms": 19.0024,
+          "p95": 28.4775
+        },
+        "abs_error": {
+          "mean_m": 13.7076,
+          "max_m": 28.5423,
+          "rms_m": 19.0024
+        }
+      },
+      "y": {
+        "setpoint_stats": {
+          "mean": 0.0375,
+          "min": 0.0374,
+          "max": 0.0416,
+          "std": 0.0005,
+          "rms": 0.0375,
+          "p95": 0.0378
+        },
+        "actual_stats": {
+          "mean": 1.0094,
+          "min": -1.1037,
+          "max": 2.4426,
+          "std": 0.9165,
+          "rms": 1.3634,
+          "p95": 2.3281
+        },
+        "error_stats": {
+          "mean": -0.9718,
+          "min": -2.4052,
+          "max": 1.1411,
+          "std": 0.9167,
+          "rms": 1.3359,
+          "p95": 0.0584
+        },
+        "abs_error": {
+          "mean_m": 1.0125,
+          "max_m": 2.4052,
+          "rms_m": 1.3359
+        }
+      },
+      "z": {
+        "setpoint_stats": {
+          "mean": 0.2186,
+          "min": -1.3591,
+          "max": 0.9606,
+          "std": 0.2982,
+          "rms": 0.3697,
+          "p95": 0.6136
+        },
+        "actual_stats": {
+          "mean": 0.0989,
+          "min": -1.3352,
+          "max": 0.9607,
+          "std": 0.2867,
+          "rms": 0.3032,
+          "p95": 0.612
+        },
+        "error_stats": {
+          "mean": 0.1198,
+          "min": -1.3584,
+          "max": 1.4238,
+          "std": 0.3948,
+          "rms": 0.4126,
+          "p95": 0.7401
+        },
+        "abs_error": {
+          "mean_m": 0.321,
+          "max_m": 1.4238,
+          "rms_m": 0.4126
+        }
+      },
+      "error_3d": {
+        "mean_m": 13.9187,
+        "max_m": 28.5915,
+        "rms_m": 19.0537
+      },
+      "altitude": {
+        "min_m": -0.96,
+        "max_m": 1.34,
+        "mean_m": -0.12
+      }
+    },
+    "vibration": {
+      "available": true,
+      "gyro": {
+        "x": {
+          "peak_to_peak_rad_s": 7.4147,
+          "rms_rad_s": 1.7569,
+          "std_rad_s": 1.7567
+        },
+        "y": {
+          "peak_to_peak_rad_s": 11.1652,
+          "rms_rad_s": 2.3421,
+          "std_rad_s": 2.3412
+        },
+        "z": {
+          "peak_to_peak_rad_s": 1.1582,
+          "rms_rad_s": 0.3046,
+          "std_rad_s": 0.2876
+        }
+      },
+      "gyro_level": "high",
+      "accel": {
+        "x": {
+          "peak_to_peak_m_s2": 20.3287,
+          "rms_m_s2": 4.5196,
+          "std_m_s2": 4.4855
+        },
+        "y": {
+          "peak_to_peak_m_s2": 20.3072,
+          "rms_m_s2": 4.0103,
+          "std_m_s2": 3.9893
+        },
+        "z": {
+          "peak_to_peak_m_s2": 28.4585,
+          "rms_m_s2": 9.2026,
+          "std_m_s2": 6.2184
+        }
+      },
+      "accel_level": "acceptable"
+    },
+    "estimator": {
+      "available": true,
+      "sample_count": 10620,
+      "pos_test_ratio": {
+        "mean": 0.0144,
+        "max": 0.0467,
+        "p95": 0.037
+      },
+      "vel_test_ratio": {
+        "mean": 0.0653,
+        "max": 0.5417,
+        "p95": 0.1576
+      },
+      "hgt_test_ratio": {
+        "mean": 0.0089,
+        "max": 0.0344,
+        "p95": 0.0256
+      },
+      "hdg_test_ratio": {
+        "mean": 0.0956,
+        "max": 0.2377,
+        "p95": 0.1522
+      },
+      "hagl_test_ratio": {
+        "mean": 0.0278,
+        "max": 0.157,
+        "p95": 0.0994
+      },
+      "output_tracking_error_0": {
+        "mean": 0.0015,
+        "min": 0.0,
+        "max": 0.0277,
+        "std": 0.0024,
+        "rms": 0.0029,
+        "p95": 0.0052
+      },
+      "output_tracking_error_1": {
+        "mean": 0.0224,
+        "min": 0.0003,
+        "max": 0.1139,
+        "std": 0.0162,
+        "rms": 0.0277,
+        "p95": 0.0521
+      },
+      "output_tracking_error_2": {
+        "mean": 0.028,
+        "min": 0.0004,
+        "max": 0.093,
+        "std": 0.0187,
+        "rms": 0.0336,
+        "p95": 0.0628
+      },
+      "innovations": {
+        "gps_hpos_x": {
+          "mean": 0.0155,
+          "min": -0.1784,
+          "max": 0.2204,
+          "std": 0.0637,
+          "rms": 0.0655,
+          "p95": 0.1444
+        },
+        "gps_hpos_y": {
+          "mean": 0.018,
+          "min": -0.2028,
+          "max": 0.2352,
+          "std": 0.0688,
+          "rms": 0.0712,
+          "p95": 0.1469
+        },
+        "gps_vpos": {
+          "mean": 0.0322,
+          "min": -0.3882,
+          "max": 0.5118,
+          "std": 0.1332,
+          "rms": 0.1371,
+          "p95": 0.2323
+        },
+        "gps_hvel_x": {
+          "mean": 0.0234,
+          "min": -2.5389,
+          "max": 0.4231,
+          "std": 0.1507,
+          "rms": 0.1525,
+          "p95": 0.2506
+        },
+        "gps_hvel_y": {
+          "mean": 0.0179,
+          "min": -0.474,
+          "max": 0.4458,
+          "std": 0.137,
+          "rms": 0.1381,
+          "p95": 0.2741
+        },
+        "gps_vvel": {
+          "mean": 0.0089,
+          "min": -0.7482,
+          "max": 0.2482,
+          "std": 0.0879,
+          "rms": 0.0884,
+          "p95": 0.1373
+        },
+        "baro_vpos": {
+          "mean": 0.0489,
+          "min": -0.3212,
+          "max": 0.4491,
+          "std": 0.0975,
+          "rms": 0.1091,
+          "p95": 0.2237
+        },
+        "heading": {
+          "mean": 0.0113,
+          "min": -0.0456,
+          "max": 0.0834,
+          "std": 0.0159,
+          "rms": 0.0195,
+          "p95": 0.0414
+        },
+        "mag_x": {
+          "mean": -0.0018,
+          "min": -0.2315,
+          "max": 0.0654,
+          "std": 0.0251,
+          "rms": 0.0252,
+          "p95": 0.0257
+        },
+        "mag_y": {
+          "mean": -0.0004,
+          "min": -0.0593,
+          "max": 0.0548,
+          "std": 0.0141,
+          "rms": 0.0141,
+          "p95": 0.0227
+        },
+        "mag_z": {
+          "mean": -0.0044,
+          "min": -0.445,
+          "max": 0.0904,
+          "std": 0.0464,
+          "rms": 0.0466,
+          "p95": 0.0362
+        }
+      },
+      "health": "marginal"
+    },
+    "battery": {
+      "available": true,
+      "sample_count": 532,
+      "voltage_v": {
+        "start": 16.2,
+        "end": 15.3,
+        "min": 15.3,
+        "max": 16.2,
+        "mean": 15.63
+      },
+      "voltage_drop_v": 0.9,
+      "current_a": {
+        "mean": -1.0,
+        "max": -1.0,
+        "min": -1.0
+      },
+      "consumed_mah": 0.0,
+      "remaining_pct": {
+        "start": 98.9,
+        "end": 50.0
+      },
+      "power_w": {
+        "mean": -15.6,
+        "max": -15.3
+      }
+    },
+    "flight_modes": {
+      "available": true,
+      "sample_count": 481,
+      "mode_times_s": {
+        "Hold": 27.59,
+        "Unknown(17)": 59.21,
+        "Unknown(18)": 19.48
+      },
+      "transitions": [
+        {
+          "time_s": 28.6,
+          "from": "Hold",
+          "to": "Unknown(17)"
+        },
+        {
+          "time_s": 87.8,
+          "from": "Unknown(17)",
+          "to": "Unknown(18)"
+        }
+      ],
+      "transition_count": 2,
+      "modes_used": [
+        "Unknown(18)",
+        "Hold",
+        "Unknown(17)"
+      ]
+    },
+    "actuators": {
+      "available": true,
+      "source": "actuator_motors",
+      "sample_count": 1063,
+      "motors": {
+        "motor_0": {
+          "mean": 0.4933,
+          "min": 0.0,
+          "max": 1.0,
+          "std": 0.4561,
+          "saturation_pct": 38.0
+        },
+        "motor_1": {
+          "mean": 0.4749,
+          "min": 0.0,
+          "max": 1.0,
+          "std": 0.4597,
+          "saturation_pct": 37.2
+        },
+        "motor_2": {
+          "mean": 0.5204,
+          "min": 0.0,
+          "max": 1.0,
+          "std": 0.4627,
+          "saturation_pct": 41.9
+        },
+        "motor_3": {
+          "mean": 0.4793,
+          "min": 0.0,
+          "max": 1.0,
+          "std": 0.4595,
+          "saturation_pct": 37.4
+        }
+      },
+      "total_saturation_pct": 38.6
+    },
+    "controller_config": {
+      "indi_enabled": false,
+      "controller_type": "PID",
+      "parameters": {
+        "MC_ROLLRATE_P": 0.15,
+        "MC_ROLLRATE_I": 0.2,
+        "MC_ROLLRATE_D": 0.003,
+        "MC_PITCHRATE_P": 0.15,
+        "MC_PITCHRATE_I": 0.2,
+        "MC_PITCHRATE_D": 0.003,
+        "MC_YAWRATE_P": 0.2,
+        "MC_YAWRATE_I": 0.1,
+        "MC_YAWRATE_D": 0.0,
+        "MC_INDI_GAIN_P": 2.5,
+        "MC_INDI_GAIN_Y": 1.5,
+        "MC_INDI_FILTER": 0.5,
+        "MC_ROLL_P": 4.0,
+        "MC_PITCH_P": 4.0,
+        "MC_YAW_P": 2.8,
+        "MPC_XY_VEL_MAX": 12.0,
+        "MPC_Z_VEL_MAX_UP": 3.0,
+        "MPC_Z_VEL_MAX_DN": 1.5,
+        "MPC_XY_CRUISE": 5.0
+      }
+    },
+    "performance_rating": {
+      "score": 41,
+      "grade": "F",
+      "summary": "6 issue(s) identified, score 41/100 (grade F).",
+      "issues": [
+        "Attitude tracking pitch RMS error high: 15.8 deg",
+        "3D position tracking RMS error high: 19.05 m",
+        "Moderate vibration levels",
+        "High gyroscope vibration detected",
+        "EKF estimator health marginal",
+        "Actuator saturation high: 38.6%"
+      ]
+    }
+  }
+}

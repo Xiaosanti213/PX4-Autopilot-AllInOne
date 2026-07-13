@@ -103,6 +103,14 @@ MulticopterRateControl::parameters_updated()
 
 	// INDI filter: set alpha directly from parameter
 	_indi_alpha_filter.setAlpha(_param_mc_indi_filter.get());
+
+	// LADRC parameters
+	if (_param_mc_ladrc_enable.get()) {
+		const Vector3f b0(_param_mc_ladrc_b0.get(), _param_mc_ladrc_b0.get(), _param_mc_ladrc_b0_y.get());
+		const Vector3f wo(_param_mc_ladrc_wo.get(), _param_mc_ladrc_wo.get(), _param_mc_ladrc_wo_y.get());
+		const Vector3f wc(_param_mc_ladrc_wc.get(), _param_mc_ladrc_wc.get(), _param_mc_ladrc_wc_y.get());
+		_ladrc.setParameters(b0, wo, wc);
+	}
 }
 
 void
@@ -195,15 +203,15 @@ MulticopterRateControl::Run()
 			// reset integral if disarmed
 			if (!_vehicle_control_mode.flag_armed || _vehicle_status.vehicle_type != vehicle_status_s::VEHICLE_TYPE_ROTARY_WING) {
 				_rate_control.resetIntegral();
+				_ladrc.reset();
 			}
 
 			// update saturation status from control allocation feedback
+			Vector<bool, 3> saturation_positive;
+			Vector<bool, 3> saturation_negative;
 			control_allocator_status_s control_allocator_status;
 
 			if (_control_allocator_status_sub.update(&control_allocator_status)) {
-				Vector<bool, 3> saturation_positive;
-				Vector<bool, 3> saturation_negative;
-
 				if (!control_allocator_status.torque_setpoint_achieved) {
 					for (size_t i = 0; i < 3; i++) {
 						if (control_allocator_status.unallocated_torque[i] > FLT_EPSILON) {
@@ -214,15 +222,36 @@ MulticopterRateControl::Run()
 						}
 					}
 				}
-
-				// TODO: send the unallocated value directly for better anti-windup
-				_rate_control.setSaturationStatus(saturation_positive, saturation_negative);
 			}
 
-			// run rate controller (PID or INDI)
+			// run rate controller (LADRC > INDI > PID)
 			Vector3f torque_setpoint;
 
-			if (_param_mc_indi_enable.get()) {
+			if (_param_mc_ladrc_enable.get()) {
+				// ================================================================
+				// LADRC: Linear Active Disturbance Rejection Control
+				// ================================================================
+				// Uses Extended State Observer (ESO) to estimate and cancel
+				// total disturbance in real-time.
+				// ESO: z1=rate, z2=accel, z3=total disturbance
+				// Control: u = (wc*(rate_sp - z1) - z3) / b0
+				// ================================================================
+
+				_ladrc.setSaturationStatus(saturation_positive, saturation_negative);
+				torque_setpoint = _ladrc.update(rates, _rates_setpoint, dt);
+
+				// Publish LADRC status (reuse rate_ctrl_status fields)
+				rate_ctrl_status_s rate_ctrl_status{};
+				rate_ctrl_status.timestamp = hrt_absolute_time();
+				const Vector3f z3 = _ladrc.getDisturbance();
+				rate_ctrl_status.rollspeed_integ = z3(0);
+				rate_ctrl_status.pitchspeed_integ = z3(1);
+				rate_ctrl_status.yawspeed_integ = z3(2);
+				_controller_status_pub.publish(rate_ctrl_status);
+
+				goto publish_setpoints;
+
+			} else if (_param_mc_indi_enable.get()) {
 				// ================================================================
 				// INDI: Incremental Nonlinear Dynamic Inversion
 				// ================================================================
@@ -276,6 +305,7 @@ MulticopterRateControl::Run()
 
 			} else {
 				// Standard PID controller
+				_rate_control.setSaturationStatus(saturation_positive, saturation_negative);
 				torque_setpoint =
 					_rate_control.update(rates, _rates_setpoint, angular_accel, dt, _maybe_landed || _landed);
 			}
@@ -283,11 +313,15 @@ MulticopterRateControl::Run()
 			// apply low-pass filtering on yaw axis to reduce high frequency torque caused by rotor acceleration
 			torque_setpoint(2) = _output_lpf_yaw.update(torque_setpoint(2), dt);
 
-			// publish rate controller status
-			rate_ctrl_status_s rate_ctrl_status{};
-			_rate_control.getRateControlStatus(rate_ctrl_status);
-			rate_ctrl_status.timestamp = hrt_absolute_time();
-			_controller_status_pub.publish(rate_ctrl_status);
+			// publish rate controller status (PID/INDI only; LADRC skips via goto)
+			{
+				rate_ctrl_status_s rate_ctrl_status{};
+				_rate_control.getRateControlStatus(rate_ctrl_status);
+				rate_ctrl_status.timestamp = hrt_absolute_time();
+				_controller_status_pub.publish(rate_ctrl_status);
+			}
+
+publish_setpoints:
 
 			// publish thrust and torque setpoints
 			vehicle_thrust_setpoint_s vehicle_thrust_setpoint{};

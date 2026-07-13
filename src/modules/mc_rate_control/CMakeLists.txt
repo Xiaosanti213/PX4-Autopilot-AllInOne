@@ -39,6 +39,8 @@ px4_add_module(
 	SRCS
 		MulticopterRateControl.cpp
 		MulticopterRateControl.hpp
+		LADRC.cpp
+		LADRC.hpp
 	MODULE_CONFIG
 		mc_acro_params.yaml
 		mc_rate_control_params.yaml
